@@ -9,14 +9,24 @@ import javax.jws.WebService;
 @WebService
 public class InsulinDoseCalculatorClass implements InsulinDoseCalculator {
 
+    /** TODO
+        - exception handling
+        - errors;
+     */
+
     /* Calculates the number of insulin units needed after one meal */
     @WebMethod
     public int mealtimeInsulinDose(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity) {
 
-        float carbohydrateDose = (carbohydrateAmount / carbohydrateToInsulinRatio) * 50/personalSensitivity ;
+        // special case
+        if(targetBloodSugar > preMealBloodSugar){
+            return 0;
+        }
+
+        float carbohydrateDose = (float) carbohydrateAmount / carbohydrateToInsulinRatio / personalSensitivity * 50;
         float highBloodSugarDose = (preMealBloodSugar - targetBloodSugar) / personalSensitivity;
 
-        return Math.round(carbohydrateDose + highBloodSugarDose);
+        return (int) (carbohydrateDose + highBloodSugarDose);
 
         /* error */
         //return -1;
@@ -33,6 +43,7 @@ public class InsulinDoseCalculatorClass implements InsulinDoseCalculator {
     }
 
     /* Determines an individual's sensitivity to one unit of insulin */
+    /* base: http://algs4.cs.princeton.edu/14analysis/LinearRegression.java.html */
     @WebMethod
     public int personalSensitivityToInsulin(int physicalActivityLevel, int[] physicalActivitySamples, int[] bloodSugarDropSamples) {
 
@@ -66,9 +77,7 @@ public class InsulinDoseCalculatorClass implements InsulinDoseCalculator {
         beta  = xybar / xxbar;
         alpha = ybar - beta * xbar;
 
-        return (int) (alpha + beta * physicalActivityLevel);
-
-
+        return Math.round(alpha + beta * physicalActivityLevel);
 
         /* error */
         //return -1;
