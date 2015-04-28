@@ -12,6 +12,8 @@
 
     <title>QCS2015</title>
 
+    <link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" type="text/css" href="visual/bootstrap-3.3.4-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="visual/base.css">
 
@@ -29,14 +31,14 @@
       <div class="col-md-2"></div>
       <div class="col-md-8 col-md-header">
        <button type="button" class="btn btn-primary btn-lg" id="btn-standard">
-         Mealtime insulin dose
+         Standard Insulin Sensitivity
          <br>
-         <small>standard insulin sensitivity</small>
+         <small>mealtime insulin dose</small>
        </button>
        <button type="button" class="btn btn-info btn-lg" id="btn-personal">
-         Mealtime Insulin Dose
+         Personal Insulin Sensitivity
          <br>
-         <small>personal insulin sensitivity</small>
+         <small>mealtime insulin dose</small>
        </button>
        <button type="button" class="btn btn-warning btn-lg" id="btn-background">
          Background Insulin Dose
@@ -102,10 +104,60 @@
 
             <div id="personal-insulin">
               <h4>Personal Insulin Dose</h4>
+
+              <!-- Total grams of carbohydrates in the meal -->
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Total grams of carbohydrates in the meal" aria-describedby="sizing-addon6">
+                <span class="input-group-addon" id="sizing-addon6">g</span>
+              </div>
+
+              <br>
+
+              <!-- Total grams of carbohydrates processed by 1 unit of rapid acting insulin -->
+              <!-- TODO: começa com valor = 12 -->
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin" aria-describedby="sizing-addon7">
+                <span class="input-group-addon" id="sizing-addon7">g</span>
+              </div>
+
+              <br>
+
+              <!-- Actual blood sugar level measured before the meal -->
+              <!-- TODO: confirmar as unidades -->
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Actual blood sugar level measured before the meal" aria-describedby="sizing-addon8">
+                <span class="input-group-addon" id="sizing-addon8">mg/dL</span>
+              </div>
+
+              <br>
+
+              <!-- Target blood sugar before the meal unit -->
+              <!-- TODO: confirmar as unidades -->
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon9">
+                <span class="input-group-addon" id="sizing-addon9">mg/dL</span>
+              </div>
+
+              <br>
+
+              <!-- Today’s physical activity level -->
+              <!-- TODO: confirmar as unidades -->
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Today’s physical activity level" aria-describedby="sizing-addon11">
+                <span class="input-group-addon" id="sizing-addon10">unit</span>
+              </div>
+
             </div>
 
             <div id="background-insulin">
               <h4>Background Insulin Dose</h4>
+
+              <!-- Weight in kilograms -->
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Weight in kilograms" aria-describedby="sizing-addon11">
+                <span class="input-group-addon" id="sizing-addon11">Kg</span>
+              </div>
+
             </div>
 
           </div>
@@ -126,19 +178,19 @@
       $(document).ready(function() {
         $("#btn-standard").click(function () {
           $("#standard-insulin").fadeIn("slow");
-          $("#personal-insulin").fadeOut("fast");
-          $("#background-insulin").fadeOut("fast");
+          $("#personal-insulin").fadeOut(1);
+          $("#background-insulin").fadeOut(1);
         });
 
         $("#btn-personal").click(function () {
-          $("#standard-insulin").fadeOut("fast");
+          $("#standard-insulin").fadeOut(1);
           $("#personal-insulin").fadeIn("slow");
-          $("#background-insulin").fadeOut("fast");
+          $("#background-insulin").fadeOut(1);
         });
 
         $("#btn-background").click(function () {
-          $("#standard-insulin").fadeOut("fast");
-          $("#personal-insulin").fadeOut("fast");
+          $("#standard-insulin").fadeOut(1);
+          $("#personal-insulin").fadeOut(1);
           $("#background-insulin").fadeIn("slow");
         });
       });
