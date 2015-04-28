@@ -15,6 +15,8 @@
     <link rel="stylesheet" type="text/css" href="visual/bootstrap-3.3.4-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="visual/base.css">
 
+
+
   </head>
   <body>
 
@@ -26,17 +28,17 @@
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-8 col-md-header">
-       <button type="button" class="btn btn-primary btn-lg">
+       <button type="button" class="btn btn-primary btn-lg" id="btn-standard">
          Mealtime insulin dose
          <br>
          <small>standard insulin sensitivity</small>
        </button>
-       <button type="button" class="btn btn-info btn-lg">
+       <button type="button" class="btn btn-info btn-lg" id="btn-personal">
          Mealtime Insulin Dose
          <br>
          <small>personal insulin sensitivity</small>
        </button>
-       <button type="button" class="btn btn-warning btn-lg">
+       <button type="button" class="btn btn-warning btn-lg" id="btn-background">
          Background Insulin Dose
        </button>
      </div>
@@ -99,11 +101,11 @@
             </div>
 
             <div id="personal-insulin">
-
+              <h4>Personal Insulin Dose</h4>
             </div>
 
             <div id="background-insulin">
-
+              <h4>Background Insulin Dose</h4>
             </div>
 
           </div>
@@ -120,6 +122,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="visual/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 
+    <script>
+      $(document).ready(function() {
+        $("#btn-standard").click(function () {
+          $("#standard-insulin").fadeIn("slow");
+          $("#personal-insulin").fadeOut("fast");
+          $("#background-insulin").fadeOut("fast");
+        });
+
+        $("#btn-personal").click(function () {
+          $("#standard-insulin").fadeOut("fast");
+          $("#personal-insulin").fadeIn("slow");
+          $("#background-insulin").fadeOut("fast");
+        });
+
+        $("#btn-background").click(function () {
+          $("#standard-insulin").fadeOut("fast");
+          $("#personal-insulin").fadeOut("fast");
+          $("#background-insulin").fadeIn("slow");
+        });
+      });
+  </script>
   </body>
 
 

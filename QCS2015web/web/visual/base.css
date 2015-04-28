@@ -47,7 +47,6 @@ body{
 }
 
 #standard-insulin{
-
 }
 
 #standard-insulin h4{
@@ -58,7 +57,7 @@ body{
 }
 
 #personal-insulin{
-
+    display: none;
 }
 
 #personal-insulin h4{
@@ -69,7 +68,7 @@ body{
 }
 
 #background-insulin{
-
+    display: none;
 }
 
 #background-insulin h4{
