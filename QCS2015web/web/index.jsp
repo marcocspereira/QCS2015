@@ -12,11 +12,10 @@
 
     <title>QCS2015</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" type="text/css" href="visual/bootstrap-3.3.4-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="visual/base.css">
-
 
 
   </head>
@@ -146,6 +145,41 @@
                 <input type="text" class="form-control" placeholder="Today’s physical activity level" aria-describedby="sizing-addon11">
                 <span class="input-group-addon" id="sizing-addon10">unit</span>
               </div>
+
+              <br>
+
+              <!-- samples -->
+              <small>Samples of physical activity level</small>
+
+              <br>
+
+              <input type="text" class="input-sample" id="pal1">
+              <input type="text" class="input-sample" id="pal2">
+              <input type="text" class="input-sample" id="pal3">
+              <input type="text" class="input-sample" id="pal4">
+              <input type="text" class="input-sample" id="pal5">
+              <input type="text" class="input-sample" id="pal6">
+              <input type="text" class="input-sample" id="pal7">
+              <input type="text" class="input-sample" id="pal8">
+              <input type="text" class="input-sample" id="pal9">
+              <input type="text" class="input-sample" id="pal10">
+
+              <br><br>
+
+              <small>Samples of drops in blood sugar from one unit of insulin</small>
+
+              <br>
+
+              <input type="text" class="input-sample" id="dbs1">
+              <input type="text" class="input-sample" id="dbs2">
+              <input type="text" class="input-sample" id="dbs3">
+              <input type="text" class="input-sample" id="dbs4">
+              <input type="text" class="input-sample" id="dbs5">
+              <input type="text" class="input-sample" id="dbs6">
+              <input type="text" class="input-sample" id="dbs7">
+              <input type="text" class="input-sample" id="dbs8">
+              <input type="text" class="input-sample" id="dbs9">
+              <input type="text" class="input-sample" id="dbs10">
 
             </div>
 
