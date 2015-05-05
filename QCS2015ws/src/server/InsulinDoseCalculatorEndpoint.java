@@ -9,6 +9,12 @@ public class InsulinDoseCalculatorEndpoint {
     public static void main(String[] args) {
         InsulinDoseCalculatorClass insulin = new InsulinDoseCalculatorClass();
 
-        Endpoint endpoint = Endpoint.publish("http://localhost:8081/qcs", insulin);
+        if(args.length!=2){
+            System.out.println("usage:<ip> <port>");
+            System.exit(0);
+        }
+
+        // args[0] = ip     args[1] = port
+        Endpoint endpoint = Endpoint.publish("http://" + args[0] +":" + args[1] , insulin);
     }
 }
