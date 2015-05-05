@@ -15,6 +15,6 @@ public class InsulinDoseCalculatorEndpoint {
         }
 
         // args[0] = ip     args[1] = port
-        Endpoint endpoint = Endpoint.publish("http://" + args[0] +":" + args[1] , insulin);
+        Endpoint endpoint = Endpoint.publish("http://" + args[0] +":" + args[1] + "/qcs" , insulin);
     }
 }
