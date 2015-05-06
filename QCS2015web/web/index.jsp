@@ -249,8 +249,20 @@
               }
           });
 
+          $("#prs_tgcp").focusout(function(){
+              if(this.value==""){
+                  this.value="12"
+              }
+          });
+
           // Individual sensitivity
           $("#std_is").focusout(function(){
+              if(this.value==""){
+                  this.value="50"
+              }
+          });
+
+          $("#prs_is").focusout(function(){
               if(this.value==""){
                   this.value="50"
               }
