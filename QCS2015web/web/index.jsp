@@ -5,6 +5,7 @@
   Time: 11:14 AM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
@@ -16,7 +17,6 @@
 
     <link rel="stylesheet" type="text/css" href="visual/bootstrap-3.3.4-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="visual/base.css">
-
 
   </head>
   <body>
@@ -48,13 +48,14 @@
 
     <br>
 
-
     <div class="row">
-    <form method="post">
+    <form method="post" action="InsulinServlet">
+    <!-- there are no "required" in any input fields because it exists 3 submit buttons -->
       <div class="col-md-2"></div>
       <div class="col-md-8 col-md-body">
         <div class="row">
           <div class="col-md-8 col-md-menu">
+
             <div id="standard-insulin">
               <h4>Standard Insulin Sensitivity</h4>
 
@@ -131,7 +132,7 @@
                        onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                        onblur="enableButtonPersonal()">
                 <span class="input-group-addon" id="sizing-addon6">g</span>
-            </div>
+              </div>
 
               <br>
 
@@ -336,7 +337,7 @@
 
         // actions to auto fill some fields
 
-          // Total grams of carbohydrates processed by 1 unit of rapid acting insulin
+          // Total grams of carbohydrates processed by 1 unit of rapid acting insulin (standard and personal)
           $("#std_tgcp").focusout(function(){
               if(this.value==""){
                 this.value="12"
@@ -349,7 +350,7 @@
               }
           });
 
-          // Individual sensitivity
+          // Individual sensitivity (standard and personal)
           $("#std_is").focusout(function(){
               if(this.value==""){
                   this.value="50"
@@ -391,7 +392,7 @@
           // the first 2 fields of each group must be filled to enable the button that calculates personal insulin
           if($("#pal1").val()!="" && $("#pal2").val()!=""
           && $("#dbs1").val()!="" && $("#dbs2").val()!=""){
-              //
+              // it only allows equivalent pairs of values (physical activity and drops in blood sugar)
               for(i=3; i<11; i++){
                   if ($("#pal" + i).val().length != $("#dbs" + i).val().length) {
                       return false;
