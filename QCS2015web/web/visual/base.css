@@ -93,6 +93,52 @@ body{
     border-radius: 3px;
 }
 
+#submit_std, #submit_prs, #submit_bg{
+    display: none;
+    text-align:center;
+    text-decoration:none;
+    width:200px;
+    height:200px;
+    border-radius:100px;
+    font-size:20px;
+    color:#fff;
+    line-height:200px;
+    border: 0px;
+    margin: 0 auto;
+}
+
+#submit_std{
+    background-color: #3A7AB5;
+    color: white;
+}
+
+#submit_std:hover{
+    color:#ccc;
+    text-decoration:none;
+    background:#333;
+}
+
+#submit_prs{
+    background-color: #60C1DD;
+    color: white;
+}
+
+#submit_prs:hover{
+    color:#ccc;
+    text-decoration:none;
+    background:#333;
+}
+
+#submit_bg{
+    background-color: #EEAC54;
+    color: white;
+}
+
+#submit_bg:hover{
+    color:#ccc;
+    text-decoration:none;
+    background:#333;
+}
 
 /*media queries*/
 
