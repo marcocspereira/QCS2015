@@ -60,7 +60,11 @@
 
               <!-- Total grams of carbohydrates in the meal -->
               <div class="input-group">
-                <input type="number" min="60" max="120" id="std_tgcm" class="form-control" placeholder="Total grams of carbohydrates in the meal" aria-describedby="sizing-addon1" data-toggle="tooltip" data-placement="bottom" title="60 >= value <= 120" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()" onblur="enableButton()">
+                <input type="number" min="60" max="120" id="std_tgcm"
+                       class="form-control" placeholder="Total grams of carbohydrates in the meal"
+                       aria-describedby="sizing-addon1" data-toggle="tooltip" data-placement="bottom"
+                       title="60 >= value <= 120" onkeypress="return isValidNumeric(event)"
+                       onkeyup="enableButtonStandard()" onblur="enableButtonStandard()">
                 <span class="input-group-addon" id="sizing-addon1">g</span>
               </div>
 
@@ -69,7 +73,11 @@
               <!-- Total grams of carbohydrates processed by 1 unit of rapid acting insulin -->
               <!-- default = 12 -->
               <div class="input-group">
-                <input type="number" min="10" max="15" id="std_tgcp" class="form-control" placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin" aria-describedby="sizing-addon2"  data-toggle="tooltip" data-placement="bottom" title="10 >= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()" onblur="enableButton()">
+                <input type="number" min="10" max="15" id="std_tgcp"
+                       class="form-control" placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin"
+                       aria-describedby="sizing-addon2" data-toggle="tooltip" data-placement="bottom"
+                       title="10 >= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
+                       onkeyup="enableButtonStandard()" onblur="enableButtonStandard()">
                 <span class="input-group-addon" id="sizing-addon2">g</span>
               </div>
 
@@ -77,7 +85,11 @@
 
               <!-- Actual blood sugar level measured before the meal -->
               <div class="input-group">
-                <input type="number" min="120" max="250" id="std_abs" class="form-control" placeholder="Actual blood sugar level measured before the meal" aria-describedby="sizing-addon3" data-toggle="tooltip" data-placement="bottom" title="120 >= value <= 250" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()" onblur="enableButton()">
+                <input type="number" min="120" max="250" id="std_abs" class="form-control"
+                       placeholder="Actual blood sugar level measured before the meal"
+                       aria-describedby="sizing-addon3" data-toggle="tooltip" data-placement="bottom"
+                       title="120 >= value <= 250" onkeypress="return isValidNumeric(event)"
+                       onkeyup="enableButtonStandard()" onblur="enableButtonStandard()">
                 <span class="input-group-addon" id="sizing-addon3">mg/dL</span>
               </div>
 
@@ -85,7 +97,11 @@
 
               <!-- Target blood sugar before the meal unit -->
               <div class="input-group">
-                <input type="number" min="80" max="120" id="std_tbs" class="form-control" placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon4" data-toggle="tooltip" data-placement="bottom" title="80 >= value <= 120" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()" onblur="enableButton()">
+                <input type="number" min="80" max="120" id="std_tbs" class="form-control"
+                       placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon4"
+                       data-toggle="tooltip" data-placement="bottom" title="80 >= value <= 120"
+                       onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()"
+                       onblur="enableButtonStandard()">
                 <span class="input-group-addon" id="sizing-addon4">mg/dL</span>
               </div>
 
@@ -94,7 +110,11 @@
               <!-- Individual sensitivity -->
               <!-- default = 50 -->
               <div class="input-group">
-                <input type="number" min="15" max="100" id="std_is" class="form-control" placeholder="Individual sensitivity" aria-describedby="sizing-addon5" data-toggle="tooltip" data-placement="bottom" title="15 >= value <= 100 (default = 50)" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()" onblur="enableButton()">
+                <input type="number" min="15" max="100" id="std_is" class="form-control"
+                       placeholder="Individual sensitivity" aria-describedby="sizing-addon5" data-toggle="tooltip"
+                       data-placement="bottom" title="15 >= value <= 100 (default = 50)"
+                       onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()"
+                       onblur="enableButtonStandard()">
                 <span class="input-group-addon" id="sizing-addon5">unit</span>
               </div>
 
@@ -105,33 +125,49 @@
 
               <!-- Total grams of carbohydrates in the meal -->
               <div class="input-group">
-                <input type="number" min="60" max="120" id="prs_tgcm" class="form-control" placeholder="Total grams of carbohydrates in the meal" aria-describedby="sizing-addon6" data-toggle="tooltip" data-placement="bottom" title="60 >= value <= 120" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()" onblur="enableButton()">
+                <input type="number" min="60" max="120" id="prs_tgcm" class="form-control"
+                       placeholder="Total grams of carbohydrates in the meal" aria-describedby="sizing-addon6"
+                       data-toggle="tooltip" data-placement="bottom" title="60 >= value <= 120"
+                       onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                       onblur="enableButtonPersonal()">
                 <span class="input-group-addon" id="sizing-addon6">g</span>
-              </div>
+            </div>
 
               <br>
 
               <!-- Total grams of carbohydrates processed by 1 unit of rapid acting insulin -->
               <!-- default = 12 -->
               <div class="input-group">
-                <input type="number" min="10" max="15" id="prs_tgcp" class="form-control" placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin" aria-describedby="sizing-addon7"  data-toggle="tooltip" data-placement="bottom" title="10 >= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()" onblur="enableButton()">
-                <span class="input-group-addon" id="sizing-addon7">g</span>
+                  <input type="number" min="10" max="15" id="prs_tgcp" class="form-control"
+                         placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin"
+                         aria-describedby="sizing-addon7" data-toggle="tooltip" data-placement="bottom"
+                         title="10 >= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
+                         onkeyup="enableButtonPersonal()" onblur="enableButtonPersonal()">
+                  <span class="input-group-addon" id="sizing-addon7">g</span>
               </div>
 
               <br>
 
               <!-- Actual blood sugar level measured before the meal -->
               <div class="input-group">
-                <input type="number" min="120" max="250" id="prs_abs" class="form-control" placeholder="Actual blood sugar level measured before the meal" aria-describedby="sizing-addon8" data-toggle="tooltip" data-placement="bottom" title="120 >= value <= 250" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()" onblur="enableButton()">
-                <span class="input-group-addon" id="sizing-addon8">mg/dL</span>
+                  <input type="number" min="120" max="250" id="prs_abs" class="form-control"
+                         placeholder="Actual blood sugar level measured before the meal"
+                         aria-describedby="sizing-addon8" data-toggle="tooltip" data-placement="bottom"
+                         title="120 >= value <= 250" onkeypress="return isValidNumeric(event)"
+                         onkeyup="enableButtonPersonal()" onblur="enableButtonPersonal()">
+                  <span class="input-group-addon" id="sizing-addon8">mg/dL</span>
               </div>
 
               <br>
 
               <!-- Target blood sugar before the meal unit -->
               <div class="input-group">
-                <input type="number" min="80" max="120" id="prs_tbs" class="form-control" placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon9"data-toggle="tooltip" data-placement="bottom" title="80 >= value <= 120" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()" onblur="enableButton()">
-                <span class="input-group-addon" id="sizing-addon9">mg/dL</span>
+                  <input type="number" min="80" max="120" id="prs_tbs" class="form-control"
+                         placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon9"
+                         data-toggle="tooltip" data-placement="bottom" title="80 >= value <= 120"
+                         onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                         onblur="enableButtonPersonal()">
+                  <span class="input-group-addon" id="sizing-addon9">mg/dL</span>
               </div>
 
               <br>
@@ -139,44 +175,98 @@
               <!-- Today’s physical activity level -->
               <!-- default = 50 -->
               <div class="input-group">
-                <input type="number" min="15" max="100" id="prs_is" class="form-control" placeholder="Today’s physical activity level" aria-describedby="sizing-addon11" data-toggle="tooltip" data-placement="bottom" title="15 >= value <= 100 (default = 50)" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()" onblur="enableButton()">
-                <span class="input-group-addon" id="sizing-addon10">unit</span>
+                  <input type="number" min="15" max="100" id="prs_is" class="form-control"
+                         placeholder="Today’s physical activity level" aria-describedby="sizing-addon11"
+                         data-toggle="tooltip" data-placement="bottom" title="15 >= value <= 100 (default = 50)"
+                         onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                         onblur="enableButtonPersonal()">
+                  <span class="input-group-addon" id="sizing-addon10">unit</span>
               </div>
 
               <br>
 
               <!-- samples -->
-              <small>Samples of physical activity level</small>
+              <small>
+                  <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom"
+                        title="Between 0 (no physical activity) and 10 (very high physical activity)">
+                  </span>
+                  Samples of physical activity level (between 0 and 10)
+              </small>
 
               <br>
 
-              <input type="text" class="input-sample" id="pal1">
-              <input type="text" class="input-sample" id="pal2">
-              <input type="text" class="input-sample" id="pal3">
-              <input type="text" class="input-sample" id="pal4">
-              <input type="text" class="input-sample" id="pal5">
-              <input type="text" class="input-sample" id="pal6">
-              <input type="text" class="input-sample" id="pal7">
-              <input type="text" class="input-sample" id="pal8">
-              <input type="text" class="input-sample" id="pal9">
-              <input type="text" class="input-sample" id="pal10">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal1"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal2"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal3"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal4"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal5"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal6"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal7"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal8"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal9"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="0" max="10" step="1" class="input-sample" id="pal10"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
 
               <br><br>
 
-              <small>Samples of drops in blood sugar from one unit of insulin</small>
+              <small>
+                  <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom"
+                        title="15mg/dl >= value <= 100mg/dl">
+                  </span>
+                  Samples of drops in blood sugar from one unit of insulin (between 15 and 100 mg/dl)
+              </small>
 
               <br>
 
-              <input type="text" class="input-sample" id="dbs1">
-              <input type="text" class="input-sample" id="dbs2">
-              <input type="text" class="input-sample" id="dbs3">
-              <input type="text" class="input-sample" id="dbs4">
-              <input type="text" class="input-sample" id="dbs5">
-              <input type="text" class="input-sample" id="dbs6">
-              <input type="text" class="input-sample" id="dbs7">
-              <input type="text" class="input-sample" id="dbs8">
-              <input type="text" class="input-sample" id="dbs9">
-              <input type="text" class="input-sample" id="dbs10">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs1"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs2"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs3"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs4"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs5"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs6"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs7"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs8"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs9"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs10"
+                     onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
+                     onblur="enableButtonPersonal()">
 
             </div>
 
@@ -185,7 +275,11 @@
 
               <!-- Weight in kilograms -->
               <div class="input-group">
-                <input type="number" min="40" max="130" id="bg_kg" class="form-control" placeholder="Weight in kilograms" aria-describedby="sizing-addon11" data-toggle="tooltip" data-placement="bottom" title="40 >= value <= 130" onkeypress="return isValidNumeric(event)" onkeyup="enableButtonBackground()" onblur="enableButtonBackground()">
+                <input type="number" min="40" max="130" id="bg_kg" class="form-control"
+                       placeholder="Weight in kilograms" aria-describedby="sizing-addon11"
+                       data-toggle="tooltip" data-placement="bottom" title="40 >= value <= 130"
+                       onkeypress="return isValidNumeric(event)" onkeyup="enableButtonBackground()"
+                       onblur="enableButtonBackground()">
                 <span class="input-group-addon" id="sizing-addon11">Kg</span>
               </div>
 
@@ -294,9 +388,20 @@
 
       // check samples (personal insulin sensitivity)
       function checkSamples(){
+          // the first 2 fields of each group must be filled to enable the button that calculates personal insulin
+          if($("#pal1").val()!="" && $("#pal2").val()!=""
+          && $("#dbs1").val()!="" && $("#dbs2").val()!=""){
+              //
+              for(i=3; i<11; i++){
+                  if ($("#pal" + i).val().length != $("#dbs" + i).val().length) {
+                      return false;
+                  }
+              }
+              return true;
+          }
 
+          return false;
       }
-
 
       // check when the buttons should be enable
       function enableButtonStandard() {
@@ -322,6 +427,11 @@
                   && isInRange($('#prs_abs').val(), 120, 250)
                   && isInRange($('#prs_tbs').val(), 80, 120)
                   && isInRange($('#prs_is').val(), 15, 100)
+                  && checkSamples()
+                  && isInRange($("#pal1").val(),0,10)
+                  && isInRange($("#pal2").val(),0,10)
+                  && isInRange($("#dbs1").val(),15,100)
+                  && isInRange($("#dbs2").val(),15,100)
           ){
               $("#submit_prs").css({display: "block"});
               $("#submit_std").css({display: "none"});
