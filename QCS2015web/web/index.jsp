@@ -214,7 +214,7 @@
     <script>
       $(document).ready(function() {
 
-        // actions on click in each of 3 main buttons
+        // actions on click in each of 3 main tabs
 
         $("#btn-standard").click(function () {
           $("#standard-insulin").fadeIn("slow");
