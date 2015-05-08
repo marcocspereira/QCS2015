@@ -49,7 +49,7 @@
     <br>
 
     <div class="row">
-    <form method="post" action="InsulinServlet">
+    <form method="post" action="/servlets.InsulinServlet">
     <!-- there are no "required" in any input fields because it exists 3 submit buttons -->
       <div class="col-md-2"></div>
       <div class="col-md-8 col-md-body">
@@ -61,7 +61,7 @@
 
               <!-- Total grams of carbohydrates in the meal -->
               <div class="input-group">
-                <input type="number" min="60" max="120" id="std_tgcm"
+                <input type="number" min="60" max="120" id="std_tgcm" name="std_tgcm"
                        class="form-control" placeholder="Total grams of carbohydrates in the meal"
                        aria-describedby="sizing-addon1" data-toggle="tooltip" data-placement="bottom"
                        title="60 >= value <= 120" onkeypress="return isValidNumeric(event)"
@@ -74,7 +74,7 @@
               <!-- Total grams of carbohydrates processed by 1 unit of rapid acting insulin -->
               <!-- default = 12 -->
               <div class="input-group">
-                <input type="number" min="10" max="15" id="std_tgcp"
+                <input type="number" min="10" max="15" id="std_tgcp" name="std_tgcp"
                        class="form-control" placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin"
                        aria-describedby="sizing-addon2" data-toggle="tooltip" data-placement="bottom"
                        title="10 >= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
@@ -86,7 +86,7 @@
 
               <!-- Actual blood sugar level measured before the meal -->
               <div class="input-group">
-                <input type="number" min="120" max="250" id="std_abs" class="form-control"
+                <input type="number" min="120" max="250" id="std_abs" name="std_abs" class="form-control"
                        placeholder="Actual blood sugar level measured before the meal"
                        aria-describedby="sizing-addon3" data-toggle="tooltip" data-placement="bottom"
                        title="120 >= value <= 250" onkeypress="return isValidNumeric(event)"
@@ -98,7 +98,7 @@
 
               <!-- Target blood sugar before the meal unit -->
               <div class="input-group">
-                <input type="number" min="80" max="120" id="std_tbs" class="form-control"
+                <input type="number" min="80" max="120" id="std_tbs" name="std_tbs" class="form-control"
                        placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon4"
                        data-toggle="tooltip" data-placement="bottom" title="80 >= value <= 120"
                        onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()"
@@ -111,7 +111,7 @@
               <!-- Individual sensitivity -->
               <!-- default = 50 -->
               <div class="input-group">
-                <input type="number" min="15" max="100" id="std_is" class="form-control"
+                <input type="number" min="15" max="100" id="std_is" name="std_is" class="form-control"
                        placeholder="Individual sensitivity" aria-describedby="sizing-addon5" data-toggle="tooltip"
                        data-placement="bottom" title="15 >= value <= 100 (default = 50)"
                        onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()"
@@ -290,9 +290,9 @@
 
           <div class="col-md-4" style="text-align: center;">
             <h4>Calculate Insulin Dose</h4>
-              <input type="submit" id="submit_std" value="Calculate">
-              <input type="submit" id="submit_prs" value="Calculate">
-              <input type="submit" id="submit_bg" value="Calculate">
+              <input type="submit" id="submit_std" value="Calculate" name="submit_std">
+              <input type="submit" id="submit_prs" value="Calculate" name="submit_prs">
+              <input type="submit" id="submit_bg" value="Calculate" name="submit_bg">
           </div>
         </div>
       </div>
