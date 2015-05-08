@@ -7,7 +7,7 @@
 .mtj.tmp/
 
 # Package Files #
-#*.jar
+*.jar
 *.war
 *.ear
 
@@ -63,44 +63,44 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
-QCS2015ws/lib/FastInoset.jar
+#QCS2015ws/lib/FastInoset.jar
 
-QCS2015ws/lib/gmbal-api-only.jar
+#QCS2015ws/lib/gmbal-api-only.jar
 
-QCS2015ws/lib/ha-api.jar
+#QCS2015ws/lib/ha-api.jar
 
-QCS2015ws/lib/javax.annotation.jar
+#QCS2015ws/lib/javax.annotation.jar
 
-QCS2015ws/lib/jaxb-api.jar
+#QCS2015ws/lib/jaxb-api.jar
 
-QCS2015ws/lib/jaxb-xjc.jar
+#QCS2015ws/lib/jaxb-xjc.jar
 
-QCS2015ws/lib/jaxb-impl.jar
+#QCS2015ws/lib/jaxb-impl.jar
 
-QCS2015ws/lib/jaxws-api.jar
+#QCS2015ws/lib/jaxws-api.jar
 
-QCS2015ws/lib/jaxws-rt.jar
+#QCS2015ws/lib/jaxws-rt.jar
 
-QCS2015ws/lib/jsr181-api.jar
+#QCS2015ws/lib/jsr181-api.jar
 
-QCS2015ws/lib/jaxws-tools.jar
+#QCS2015ws/lib/jaxws-tools.jar
 
-QCS2015ws/lib/woodstox-core-asl.jar
+#QCS2015ws/lib/woodstox-core-asl.jar
 
-QCS2015ws/lib/streambuffer.jar
+#QCS2015ws/lib/streambuffer.jar
 
-QCS2015ws/lib/stax2-api.jar
+#QCS2015ws/lib/stax2-api.jar
 
-QCS2015ws/lib/stax-ex.jar
+#QCS2015ws/lib/stax-ex.jar
 
-QCS2015ws/lib/policy.jar
+#QCS2015ws/lib/policy.jar
 
-QCS2015ws/lib/mimepull.jar
+#QCS2015ws/lib/mimepull.jar
 
-QCS2015ws/lib/management-api.jar
+#QCS2015ws/lib/management-api.jar
 
-QCS2015ws/lib/saaj-api.jar
+#QCS2015ws/lib/saaj-api.jar
 
-QCS2015ws/lib/saaj-impl.jar
+#QCS2015ws/lib/saaj-impl.jar
 
-QCS2015ws/lib/mail.jar
+#QCS2015ws/lib/mail.jar
