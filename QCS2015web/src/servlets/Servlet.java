@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 /**
  * Created by Marco on 5/7/15.
  */
-@WebServlet ("/Servlet")
+@WebServlet ("/servlets/Servlet")
 public class Servlet extends javax.servlet.http.HttpServlet {
 
     private void standardInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {

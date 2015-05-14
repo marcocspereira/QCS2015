@@ -469,7 +469,7 @@
           $.ajax({
               type: "GET",
               data: dataString,
-              url: "Servlet",
+              url: "servlets/Servlet",
               success:function(data) {
 
                   if (data != null){
