@@ -186,6 +186,12 @@
 
               <br>
 
+              <small>
+                  <b>Pleas fill, at least, two pairs of values per sample</b>
+                </small>
+
+              <br><br>
+
               <!-- samples -->
               <small>
                   <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom"
@@ -276,7 +282,7 @@
 
               <!-- Weight in kilograms -->
               <div class="input-group">
-                <input type="number" min="40" max="130" id="bg_kg" class="form-control"
+                <input type="number" min="40" max="130" name="bg_kg" id="bg_kg" class="form-control"
                        placeholder="Weight in kilograms" aria-describedby="sizing-addon11"
                        data-toggle="tooltip" data-placement="bottom" title="40 >= value <= 130"
                        onkeypress="return isValidNumeric(event)" onkeyup="enableButtonBackground()"
