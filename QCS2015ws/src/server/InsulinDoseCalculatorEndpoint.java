@@ -7,7 +7,7 @@ import javax.xml.ws.Endpoint;
  */
 public class InsulinDoseCalculatorEndpoint {
     public static void main(String[] args) {
-        InsulinDoseCalculatorClass insulin = new InsulinDoseCalculatorClass();
+        InsulinDoseCalculator insulin = new InsulinDoseCalculator();
 
         if(args.length!=2){
             System.out.println("usage:<ip> <port>");
@@ -15,6 +15,6 @@ public class InsulinDoseCalculatorEndpoint {
         }
 
         // args[0] = ip     args[1] = port
-        Endpoint endpoint = Endpoint.publish("http://" + args[0] +":" + args[1] + "/qcs" , insulin);
+        Endpoint endpoint = Endpoint.publish("http://" + args[0] +":" + args[1] + "/insulin" , insulin);
     }
 }

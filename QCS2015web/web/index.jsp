@@ -49,7 +49,7 @@
     <br>
 
     <div class="row">
-    <form method="post" action="/servlets.InsulinServlet">
+    <!--<form method="post" action="/servlets.InsulinServlet">-->
     <!-- there are no "required" in any input fields because it exists 3 submit buttons -->
       <div class="col-md-2"></div>
       <div class="col-md-8 col-md-body">
@@ -268,10 +268,10 @@
               <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs8"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                      onblur="enableButtonPersonal()">
-              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs9"
+      _in="15" max="100" step="1" class="input-sample" id="dbs9"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                     onblur="enableButtonPersonal()">
-              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs10"
+              <input type="number" min="15" max="100" step="1" clas_s="input-sample" id="dbs10"
+                     onblur="enableButton   Personal()">
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                      onblur="enableButtonPersonal()">
 
@@ -296,14 +296,14 @@
 
           <div class="col-md-4" style="text-align: center;">
             <h4>Calculate Insulin Dose</h4>
-              <input type="submit" id="submit_std" value="Calculate" name="submit_std">
-              <input type="submit" id="submit_prs" value="Calculate" name="submit_prs">
-              <input type="submit" id="submit_bg" value="Calculate" name="submit_bg">
+              <input type="button" id="submit_std" value="Calculate" name="submit_std" onclick="submitStandard();">
+              <input type="button" id="submit_prs" value="Calculate" name="submit_prs">
+              <input type="button" id="submit_bg" value="Calculate" name="submit_bg">
           </div>
         </div>
       </div>
       <div class="col-md-2"></div>
-    </form>
+    <!--</form>-->
     </div>
 
   </div>
@@ -461,6 +461,33 @@
               $("#submit_prs").css({display: "none"});
               $("#submit_bg").css({display: "none"});
           }
+
+      }
+
+      function submitStandard(){
+          var dataString = {"FLAG":"standard"};
+          $.ajax({
+              type: "GET",
+              data: dataString,
+              url: "Servlet",
+              success:function(data) {
+
+                  if (data != null){
+
+                      tetas = JSON.parse(data);
+
+                      window.alert(tetas.pilas);
+
+                  }
+              }
+          });
+      }
+
+      function submitPersonal(){
+
+      }
+
+      function submitBackground(){
 
       }
 

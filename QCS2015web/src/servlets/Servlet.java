@@ -1,12 +1,16 @@
 package servlets;
 
-import javax.servlet.RequestDispatcher;
+import com.google.gson.JsonObject;
+
+import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 
 /**
  * Created by Marco on 5/7/15.
  */
+@WebServlet ("/Servlet")
 public class Servlet extends javax.servlet.http.HttpServlet {
 
     private void standardInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -48,6 +52,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         disp.forward(request, response);
         */
 
+
         if(request.getParameter("submit_std") != null){
             standardInsulin(request, response);
         }
@@ -63,6 +68,28 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         // redirect to doPost, just in case
-        doPost(request, response);
+        // doPost(request, response);
+
+        PrintWriter out = response.getWriter();
+
+        JsonObject myObj = new JsonObject();
+
+
+
+        if(!request.getParameterMap().isEmpty()){
+
+            if(request.getParameter("FLAG") != null){
+                String op = request.getParameter("FLAG");
+
+                System.out.println(op);
+
+                myObj.addProperty("pilas","cona");
+
+                out.println(myObj.toString());
+
+                out.close();
+
+            }
+        }
     }
 }
