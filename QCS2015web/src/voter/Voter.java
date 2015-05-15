@@ -5,6 +5,7 @@ import results.TechnicalDetail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -59,11 +60,52 @@ public class Voter {
 
     }
 
-    public TechnicalDetail personalSensitivityToInsulin(int physicalActivityLevel, int[] physicalActivitySamples, int[] bloodSugarDropSamples){
+    public TechnicalDetail personalSensitivityToInsulin(int carbohydrateAmount,
+                                                        int carbohydrateToInsulinRatio,
+                                                        int preMealBloodSugar,
+                                                        int targetBloodSugarint,
+                                                        int physicalActivityLevel,
+                                                        List<Integer> physicalActivitySamples,
+                                                        List<Integer> bloodSugarDropSamples){
+
+        int individualSensitivity;
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
-        return chooser();
+        // criar as threads
+        for(int i=0;i<numberThreads;i++) {
+            PersonalThread personalTask = new PersonalThread(urls[i], physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
+            Future<Integer> future = pool.submit(personalTask);
+            threads.add(future);
+            lista.add(future);
+        }
+
+        //Timer for each thread
+        for(int i=0;i<numberThreads;i++) {
+            Future<Integer> future = threads.get(i);
+            try {
+                System.out.println("Started...");
+                try {
+                    // 1 segundo por thread
+                    future.get(1, TimeUnit.SECONDS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Finished!");
+            } catch (TimeoutException e) {
+                System.out.println("Terminated!");
+            }
+
+            lista.add(future);
+        }
+
+        pool.shutdownNow();
+
+        individualSensitivity = chooser().getMajority_result();
+
+        return mealtimeInsulin(carbohydrateAmount, carbohydrateToInsulinRatio, preMealBloodSugar, targetBloodSugarint, individualSensitivity);
     }
 
 
@@ -100,7 +142,6 @@ public class Voter {
 
     }
 
-
     // escolhe a maioria (em construcao)
     private TechnicalDetail chooser() {
 
@@ -133,7 +174,6 @@ public class Voter {
 
         // falta o majority result
         td.setMajority_result(34);  // SLB 34º titulo
-
 
         // return chosen_val;
         return td;

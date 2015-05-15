@@ -32,7 +32,6 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         // Individual sensitivity
         int std_is = Integer.parseInt(request.getParameter("std_is"));
 
-        // todo enviar para o voter
         // Techincal detail
         TechnicalDetail t = new TechnicalDetail();
 
@@ -62,30 +61,19 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         List<String> sample_dbs = new Gson().fromJson(request.getParameter("sample_dbs"), type);
 
         int size_of_samples = sample_pal.size();
-        int sample_pal_int[] = new int[size_of_samples];
-        int sample_dbs_int[] = new int[size_of_samples];
+        List<Integer> sample_pal_int = new ArrayList<>();
+        List<Integer> sample_dbs_int = new ArrayList<>();
         int i;
         for(i=0; i<size_of_samples; i++){
-            sample_pal_int[i] = Integer.parseInt( sample_pal.get(i));
-            sample_dbs_int[i] = Integer.parseInt(sample_dbs.get(i));
+            sample_pal_int.add(Integer.parseInt(sample_pal.get(i)));
+            sample_dbs_int.add(Integer.parseInt(sample_dbs.get(i)));
         }
 
-        // todo passar para o votador
-        // todo receber resposta
-
-
-
-        // testing technical detail * ELIMINAR *
-        List<Integer> l = new ArrayList<Integer>();
+        // Techincal detail
         TechnicalDetail t = new TechnicalDetail();
-        t.setNum_webservices(3);
-        l.add(22);
-        l.add(22);
-        l.add(23);
-        t.setResults(l);
-        t.setMajority_result(22);
 
-        // todo receber o technical detail do voter com os resultados para depois retornar para o cliente web
+        t = voter.personalSensitivityToInsulin(prs_tgcm, prs_tgcp, prs_tbs, prs_tbs, prs_pa, sample_pal_int, sample_dbs_int);
+
         return t;
 
     }
@@ -95,25 +83,21 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         // Weight in kilograms
         int bg_kg = Integer.parseInt(request.getParameter("bg_kg"));
 
-
-
         // Techincal detail
         TechnicalDetail t = new TechnicalDetail();
 
         t = voter.backgroundInsulin(bg_kg);
 
-        // todo receber o technical detail do voter com os resultados para depois retornar para o cliente web
-
         return t;
 
     }
 
-    protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-
+    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+        doPost(request, response);
 
     }
 
-    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         // redirect to doPost, just in case
         // doPost(request, response);

@@ -483,7 +483,7 @@
   function ajaxConnection(insulinType, dataString){
 
     $.ajax({
-      type: "GET",
+      type: "POST",
       data: dataString,
       url: "servlets/Servlet",
       success:function(data) {

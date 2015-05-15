@@ -19,11 +19,11 @@ public class PersonalThread implements Callable<Integer> {
     private final String serviceName= "InsulinDoseCalculatorService";
 
     private int physicalActivityLevel;
-    private int[] physicalActivitySamples;
-    private int[] bloodSugarDropSamples;
+    private List<Integer> physicalActivitySamples;
+    private List<Integer> bloodSugarDropSamples;
 
 
-    public PersonalThread(String address, int physicalActivityLevel, int[] physicalActivitySamples, int[] bloodSugarDropSamples){
+    public PersonalThread(String address, int physicalActivityLevel, List<Integer> physicalActivitySamples, List<Integer> bloodSugarDropSamples){
 
         this.address = address;
         this.physicalActivitySamples = physicalActivitySamples;
@@ -49,7 +49,7 @@ public class PersonalThread implements Callable<Integer> {
 
         InsulinDoseCalculator proxy = service.getPort(InsulinDoseCalculator.class);
 
-        //result = proxy.personalSensitivityToInsulin(physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
+        result = proxy.personalSensitivityToInsulin(physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
 
         return result;
 
