@@ -17,7 +17,7 @@ public class Voter {
     private final String[] urls = {"http://liis-lab.dei.uc.pt:8080/Server?wsdl",
                                    "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
                                    "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
-                                   "http://qcs10.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+                                   "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
                                    "http://qcs12.dei.uc.pt:8080/insulin?wsdl"};
     private final int numberThreads = 5;                        // number of webservices
     ArrayList<Future<Integer>> lista = new ArrayList<Future<Integer>>();    //  valores (inteiros) devolvidos por cada web service

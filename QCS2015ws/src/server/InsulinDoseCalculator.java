@@ -24,8 +24,8 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
                 return 0;
             }
 
-            float carbohydrateDose = (float) carbohydrateAmount / carbohydrateToInsulinRatio / personalSensitivity * 50;
-            float highBloodSugarDose = (preMealBloodSugar - targetBloodSugar) / personalSensitivity;
+            double carbohydrateDose = (double) carbohydrateAmount / carbohydrateToInsulinRatio / personalSensitivity * 50;
+            double highBloodSugarDose = (preMealBloodSugar - targetBloodSugar) / personalSensitivity;
 
             return (int) (carbohydrateDose + highBloodSugarDose);
         }
@@ -54,7 +54,7 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
     public int personalSensitivityToInsulin(int physicalActivityLevel, int[] physicalActivitySamples, int[] bloodSugarDropSamples) {
 
         int i, arrayLength = physicalActivitySamples.length;
-        float alpha, beta;
+        double alpha, beta;
 
         try {
             if (physicalActivitySamples.length != bloodSugarDropSamples.length) {
@@ -62,18 +62,18 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
             }
 
             // first pass
-            float sumx = 0, sumy = 0;
+            double sumx = 0, sumy = 0;
 
             for (i = 0; i < arrayLength; i++) {
                 sumx += physicalActivitySamples[i];
                 sumy += bloodSugarDropSamples[i];
             }
 
-            float xbar = sumx / arrayLength;
-            float ybar = sumy / arrayLength;
+            double xbar = sumx / arrayLength;
+            double ybar = sumy / arrayLength;
 
             // second pass: compute summary statistics
-            float xxbar = 0, yybar = 0, xybar = 0;
+            double xxbar = 0, yybar = 0, xybar = 0;
             for (i = 0; i < arrayLength; i++) {
                 xxbar += (physicalActivitySamples[i] - xbar) * (physicalActivitySamples[i] - xbar);
                 xybar += (physicalActivitySamples[i] - xbar) * (bloodSugarDropSamples[i] - ybar);
@@ -81,7 +81,7 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
             beta = xybar / xxbar;
             alpha = ybar - beta * xbar;
 
-            return Math.round(alpha + beta * physicalActivityLevel);
+            return (int) Math.round(alpha + beta * physicalActivityLevel);
         }
         catch(Exception e){
             System.err.println("Personal Sensitivity To Insulin error:" + e.getMessage());
