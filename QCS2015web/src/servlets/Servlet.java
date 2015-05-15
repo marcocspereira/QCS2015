@@ -3,6 +3,7 @@ package servlets;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import results.TechnicalDetail;
+import voter.Voter;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
@@ -100,6 +101,12 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
         // Weight in kilograms
         int bg_kg = Integer.parseInt(request.getParameter("bg_kg"));
+        int result;
+
+        // instanciar objeto do tipo voter
+        Voter voter = new Voter();
+
+        result = voter.backgroundInsulin(bg_kg);
 
         // todo passar para o votador
         // todo receber resposta

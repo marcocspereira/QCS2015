@@ -8,8 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.Callable;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Created by cmfsnts on 15/05/2015.
  */

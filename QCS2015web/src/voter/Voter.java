@@ -1,6 +1,8 @@
 package voter;
 
 
+import results.TechnicalDetail;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.*;
@@ -18,9 +20,9 @@ public class Voter {
                                    "http://qcs12.dei.uc.pt:8080/insulin?wsdl"};
     private final int numberThreads = 5;                        // number of webservices
     ArrayList<Future<Integer>> lista = new ArrayList<Future<Integer>>();    //  valores (inteiros) devolvidos por cada web service
-    ArrayList<Future<Integer>> temp = new ArrayList<Future<Integer>>();     //  guarda as threads criadas para ligar aos N web services
+    ArrayList<Future<Integer>> threads = new ArrayList<Future<Integer>>();     //  guarda as threads criadas para ligar aos N web services
 
-    public void backgroundInsulin(int weight){
+    public TechnicalDetail backgroundInsulin(int weight){
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
@@ -28,13 +30,13 @@ public class Voter {
         for(int i=0;i<numberThreads;i++) {
             BackgroundThread task = new BackgroundThread(urls[i], weight);
             Future<Integer> future = pool.submit(task);
-            temp.add(future);
+            threads.add(future);
             lista.add(future);
         }
 
         //Timer for each thread
         for(int i=0;i<numberThreads;i++) {
-            Future<Integer> future = temp.get(i);
+            Future<Integer> future = threads.get(i);
             try {
                 System.out.println("Started...");
                 try {
@@ -53,12 +55,12 @@ public class Voter {
 
         pool.shutdownNow();
 
-        chooser();
+        return chooser();
 
     }
 
 
-    public void meatimeInsulin(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity){
+    public TechnicalDetail meatimeInsulin(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity){
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
@@ -87,28 +89,47 @@ public class Voter {
 
         pool.shutdownNow();
 
-        chooser();
+        return chooser();
 
     }
 
 
     // escolhe a maioria (em construcao)
-    private int chooser() {
-    //check for voters/2 + 1 for majority
+    private TechnicalDetail chooser() {
+
+        TechnicalDetail td = new TechnicalDetail();
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+
+        //check for voters/2 + 1 for majority
         int chosen_val = 0;
         int count = 0;
         int location = 0;
 
         int array_ocorrencia[] = new int[5];
 
-        Arrays.fill(array_ocorrencia,-2);
+        Arrays.fill(array_ocorrencia, -2);
+
+        td.setNum_webservices(numberThreads);
+
+        for(int i=0;i<numberThreads;i++){
+            try {
+                temp.add(lista.get(i).get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
 
 
+        }
+
+        td.setResults(temp);
+
+        // falta o majority result
 
 
-
-
-        return chosen_val;
+        // return chosen_val;
+        return td;
 
     }
 
