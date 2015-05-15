@@ -19,7 +19,7 @@ import java.util.List;
 @WebServlet ("/servlets/Servlet")
 public class Servlet extends javax.servlet.http.HttpServlet {
 
-    private TechnicalDetail standardInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    private TechnicalDetail standardInsulin(Voter voter, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         // Total grams of carbohydrates in the meal
         int std_tgcm = Integer.parseInt(request.getParameter("std_tgcm"));
@@ -33,24 +33,16 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         int std_is = Integer.parseInt(request.getParameter("std_is"));
 
         // todo enviar para o voter
-
-        // testing technical detail * ELIMINAR *
-        List<Integer> l = new ArrayList<Integer>();
+        // Techincal detail
         TechnicalDetail t = new TechnicalDetail();
-        t.setNum_webservices(3);
-        l.add(22);
-        l.add(22);
-        l.add(23);
-        t.setResults(l);
-        t.setMajority_result(22);
 
-        // todo receber o technical detail do voter com os resultados para depois retornar para o cliente web
+        t = voter.mealtimeInsulin(std_tgcm, std_tgcp, std_abs, std_tbs, std_is);
 
         return t;
 
     }
 
-    private TechnicalDetail personalInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    private TechnicalDetail personalInsulin(Voter voter, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         Type type = new TypeToken<List<String>>(){}.getType();
 
@@ -82,6 +74,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         // todo receber resposta
 
 
+
         // testing technical detail * ELIMINAR *
         List<Integer> l = new ArrayList<Integer>();
         TechnicalDetail t = new TechnicalDetail();
@@ -97,13 +90,12 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
     }
 
-    private TechnicalDetail backgroundInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    private TechnicalDetail backgroundInsulin(Voter voter, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         // Weight in kilograms
         int bg_kg = Integer.parseInt(request.getParameter("bg_kg"));
 
-        // instanciar objeto do tipo voter
-        Voter voter = new Voter();
+
 
         // Techincal detail
         TechnicalDetail t = new TechnicalDetail();
@@ -117,7 +109,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        
+
 
     }
 
@@ -132,6 +124,9 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         Gson gson = new Gson();
         String json;
 
+        // instanciar objeto do tipo voter
+        Voter voter = new Voter();
+
         if(!request.getParameterMap().isEmpty()){
 
             if(request.getParameter("FLAG") != null){
@@ -140,13 +135,13 @@ public class Servlet extends javax.servlet.http.HttpServlet {
                 System.out.println("Operation:" + op);
 
                 if(op.equals("standard")){
-                    td = standardInsulin(request, response);
+                    td = standardInsulin(voter, request, response);
                 }
                 else if(op.equals("personal")){
-                    td = personalInsulin(request, response);
+                    td = personalInsulin(voter, request, response);
                 }
                 else if(op.equals("background")){
-                    td = backgroundInsulin(request, response);
+                    td = backgroundInsulin(voter, request, response);
                 }
 
                 json = gson.toJson(td);

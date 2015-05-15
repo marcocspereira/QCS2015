@@ -173,11 +173,10 @@
             <br>
 
             <!-- Today’s physical activity level -->
-            <!-- default = 50 -->
             <div class="input-group">
-              <input type="number" min="15" max="100" id="prs_is" class="form-control"
+              <input type="number" min="0" max="10" id="prs_is" class="form-control"
                      placeholder="Today’s physical activity level" aria-describedby="sizing-addon11"
-                     data-toggle="tooltip" data-placement="bottom" title="15 >= value <= 100 (default = 50)"
+                     data-toggle="tooltip" data-placement="bottom" title="0 >= value <= 10"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                      onblur="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon10">unit</span>
@@ -322,14 +321,8 @@
       }
     });
 
-    // Individual sensitivity (standard and personal)
+    // Individual sensitivity (standard)
     $("#std_is").focusout(function(){
-      if(this.value==""){
-        this.value="50"
-      }
-    });
-
-    $("#prs_is").focusout(function(){
       if(this.value==""){
         this.value="50"
       }
@@ -408,7 +401,7 @@
             && isInRange($('#prs_tgcp').val(), 10, 15)
             && isInRange($('#prs_abs').val(), 120, 250)
             && isInRange($('#prs_tbs').val(), 80, 120)
-            && isInRange($('#prs_is').val(), 15, 100)
+            && isInRange($('#prs_is').val(), 0, 10)
             && checkSamples()
             && isInRange($("#pal1").val(),0,10)
             && isInRange($("#pal2").val(),0,10)
@@ -449,7 +442,6 @@
     };
 
     ajaxConnection("Standard", dataString);
-
 
   }
 

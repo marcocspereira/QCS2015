@@ -59,8 +59,15 @@ public class Voter {
 
     }
 
+    public TechnicalDetail personalSensitivityToInsulin(int physicalActivityLevel, int[] physicalActivitySamples, int[] bloodSugarDropSamples){
 
-    public TechnicalDetail meatimeInsulin(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity){
+        ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
+
+        return chooser();
+    }
+
+
+    public TechnicalDetail mealtimeInsulin(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity){
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
@@ -119,7 +126,6 @@ public class Voter {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-
 
         }
 
