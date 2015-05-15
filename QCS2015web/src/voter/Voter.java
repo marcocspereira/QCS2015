@@ -3,9 +3,7 @@ package voter;
 
 import results.TechnicalDetail;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -172,15 +170,47 @@ public class Voter {
 
         td.setResults(temp);
 
-        // falta o majority result
-        td.setMajority_result(34);  // SLB 34º titulo
+        Set<Integer> uniques = new HashSet<Integer>(temp);
+        ArrayList<Integer> uniquesArray = new ArrayList<>(uniques);
 
-        // return chosen_val;
+        List<Integer> occurences = Arrays.asList(new Integer[uniquesArray.size()]);
+        Collections.fill(occurences, 0);
+
+        for (int i = 0; i < temp.size(); i++)
+        {
+            for (int j = 0; j < uniquesArray.size(); j++)
+            {
+                if (temp.get(i) == uniquesArray.get( j ) || temp.get(i)-1 == uniquesArray.get( j ) || temp.get(i)+1 == uniquesArray.get( j ))
+                {
+                    occurences.set(j, occurences.get( j )+1);
+//	                if (occurences.get( j ) >= 3) System.out.println(uniquesArray.get( j ));
+                }
+            }
+        }
+        System.out.println(temp);
+        System.out.println(uniquesArray);
+        System.out.println(Arrays.toString(occurences.toArray()));
+
+        int maxValue = 0;
+        int maxIndex = 0;
+        for (int counter = 1; counter < occurences.size(); counter++)
+        {
+            if (occurences.get(counter) > maxValue)
+            {
+                maxValue = occurences.get(counter);
+                maxIndex = counter;
+            }
+        }
+        System.out.println(uniquesArray.get(maxIndex));
+
+        // falta o majority result
+        td.setMajority_result(uniquesArray.get(maxIndex));
+
+        lista.clear();
+
         return td;
 
     }
-
-
 }
 
 
