@@ -31,13 +31,21 @@ body{
     text-align: center;
 }
 
-.col-md-body{
+.col-md-body, #results-col{
     padding: 1%;
     background-color: #FFFFFF;
     border: 2px solid #C3DAE3;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+}
+
+#results-window{
+    display: none;
+}
+
+#results-window{
+    text-align: center;
 }
 
 .btn-lg{

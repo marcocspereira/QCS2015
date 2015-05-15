@@ -1,10 +1,13 @@
 package servlets;
 
-import com.google.gson.JsonObject;
+import com.google.gson.Gson;
+import results.TechnicalDetail;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -13,36 +16,105 @@ import java.io.PrintWriter;
 @WebServlet ("/servlets/Servlet")
 public class Servlet extends javax.servlet.http.HttpServlet {
 
-    private void standardInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    private TechnicalDetail standardInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+
+        // Total grams of carbohydrates in the meal
         int std_tgcm = Integer.parseInt(request.getParameter("std_tgcm"));
+        // Total grams of carbohydrates processed by 1 unit of rapid acting insulin
         int std_tgcp = Integer.parseInt(request.getParameter("std_tgcp"));
+        // Actual blood sugar level measured before the meal
         int std_abs = Integer.parseInt(request.getParameter("std_abs"));
+        // Target blood sugar before the meal
         int std_tbs = Integer.parseInt(request.getParameter("std_tbs"));
+        // Individual sensitivity
         int std_is = Integer.parseInt(request.getParameter("std_is"));
 
-        // passar para o votador
-        // receber resposta
-        System.out.println(std_tgcm);
+        // todo enviar para o voter
+
+        // testing technical detail * ELIMINAR *
+        List<Integer> l = new ArrayList<Integer>();
+        TechnicalDetail t = new TechnicalDetail();
+        t.setNum_webservices(3);
+        l.add(22);
+        l.add(22);
+        l.add(23);
+        t.setResults(l);
+        t.setMajority_result(22);
+
+        // todo receber o technical detail do voter com os resultados para depois retornar para o cliente web
+
+        return t;
 
     }
 
-    private void personalInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    private TechnicalDetail personalInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+
+        // Total grams of carbohydrates in the meal
         int prs_tgcm = Integer.parseInt(request.getParameter("prs_tgcm"));
+        // Total grams of carbohydrates processed by 1 unit of rapid acting insulin
         int prs_tgcp = Integer.parseInt(request.getParameter("prs_tgcp"));
+        // Actual blood sugar level measured before the meal
         int prs_abs = Integer.parseInt(request.getParameter("prs_abs"));
+        // Target blood sugar before the meal
         int prs_tbs = Integer.parseInt(request.getParameter("prs_tbs"));
-        int prs_is = Integer.parseInt(request.getParameter("prs_is"));
+        // Today’s physical activity level
+        int prs_pa = Integer.parseInt(request.getParameter("prs_is"));
+        // Samples of physical activity level in a given day
+        List<String> sample_pal = new Gson().fromJson(request.getParameter("sample_pal"), List.class);
+        // Samples of drops in blood sugar from one unit of insulin in that day
+        List<String> sample_dbs = new Gson().fromJson(request.getParameter("sample_dbs"), List.class);
 
-        // passar para o votador
-        // receber resposta
+        int size_of_samples = sample_pal.size();
+        int sample_pal_int[] = new int[size_of_samples];
+        int sample_dbs_int[] = new int[size_of_samples];
+        int i;
+        for(i=0; i<size_of_samples; i++){
+            sample_pal_int[i] = Integer.parseInt( sample_pal.get(i));
+            sample_dbs_int[i] = Integer.parseInt(sample_dbs.get(i));
+            System.out.println("pal "+i+": "+ sample_pal_int[i]);
+            System.out.println("dbs "+i+": " + sample_dbs_int[i]);
+        }
+
+        // todo passar para o votador
+        // todo receber resposta
+
+
+        // testing technical detail * ELIMINAR *
+        List<Integer> l = new ArrayList<Integer>();
+        TechnicalDetail t = new TechnicalDetail();
+        t.setNum_webservices(3);
+        l.add(22);
+        l.add(22);
+        l.add(23);
+        t.setResults(l);
+        t.setMajority_result(22);
+
+        // todo receber o technical detail do voter com os resultados para depois retornar para o cliente web
+        return t;
 
     }
 
-    private void backgroundInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    private TechnicalDetail backgroundInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+
+        // Weight in kilograms
         int bg_kg = Integer.parseInt(request.getParameter("bg_kg"));
-        System.out.println(bg_kg);
-        // passar para o votador
-        // receber resposta
+
+        // todo passar para o votador
+        // todo receber resposta
+
+        // testing technical detail * ELIMINAR *
+        List<Integer> l = new ArrayList<Integer>();
+        TechnicalDetail t = new TechnicalDetail();
+        t.setNum_webservices(3);
+        l.add(22);
+        l.add(22);
+        l.add(23);
+        t.setResults(l);
+        t.setMajority_result(22);
+
+        // todo receber o technical detail do voter com os resultados para depois retornar para o cliente web
+
+        return t;
 
     }
 
@@ -51,17 +123,6 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
         disp.forward(request, response);
         */
-
-
-        if(request.getParameter("submit_std") != null){
-            standardInsulin(request, response);
-        }
-        else if(request.getParameter("submit_prs") != null){
-            personalInsulin(request, response);
-        }
-        else if(request.getParameter("submit_bg") != null){
-            backgroundInsulin(request, response);
-        }
 
     }
 
@@ -72,20 +133,29 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
         PrintWriter out = response.getWriter();
 
-        JsonObject myObj = new JsonObject();
-
-
+        TechnicalDetail td = null;
+        Gson gson = new Gson();
+        String json;
 
         if(!request.getParameterMap().isEmpty()){
 
             if(request.getParameter("FLAG") != null){
+
                 String op = request.getParameter("FLAG");
+                System.out.println("Operation:" + op);
 
-                System.out.println(op);
+                if(op.equals("standard")){
+                    td = standardInsulin(request, response);
+                }
+                else if(op.equals("personal")){
+                    td = personalInsulin(request, response);
+                }
+                else if(op.equals("background")){
+                    td = backgroundInsulin(request, response);
+                }
 
-                myObj.addProperty("pilas","cona");
-
-                out.println(myObj.toString());
+                json = gson.toJson(td);
+                out.write(json);
 
                 out.close();
 

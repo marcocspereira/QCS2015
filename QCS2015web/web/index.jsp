@@ -48,9 +48,8 @@
 
     <br>
 
-    <div class="row">
-    <!--<form method="post" action="/servlets.InsulinServlet">-->
-    <!-- there are no "required" in any input fields because it exists 3 submit buttons -->
+    <!-- window where it is showed all the input fields for each calculation of insulin -->
+    <div class="row" id="main-window">
       <div class="col-md-2"></div>
       <div class="col-md-8 col-md-body">
         <div class="row">
@@ -61,7 +60,7 @@
 
               <!-- Total grams of carbohydrates in the meal -->
               <div class="input-group">
-                <input type="number" min="60" max="120" id="std_tgcm" name="std_tgcm"
+                <input type="number" min="60" max="120" id="std_tgcm"
                        class="form-control" placeholder="Total grams of carbohydrates in the meal"
                        aria-describedby="sizing-addon1" data-toggle="tooltip" data-placement="bottom"
                        title="60 >= value <= 120" onkeypress="return isValidNumeric(event)"
@@ -74,7 +73,7 @@
               <!-- Total grams of carbohydrates processed by 1 unit of rapid acting insulin -->
               <!-- default = 12 -->
               <div class="input-group">
-                <input type="number" min="10" max="15" id="std_tgcp" name="std_tgcp"
+                <input type="number" min="10" max="15" id="std_tgcp"
                        class="form-control" placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin"
                        aria-describedby="sizing-addon2" data-toggle="tooltip" data-placement="bottom"
                        title="10 >= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
@@ -86,7 +85,7 @@
 
               <!-- Actual blood sugar level measured before the meal -->
               <div class="input-group">
-                <input type="number" min="120" max="250" id="std_abs" name="std_abs" class="form-control"
+                <input type="number" min="120" max="250" id="std_abs" class="form-control"
                        placeholder="Actual blood sugar level measured before the meal"
                        aria-describedby="sizing-addon3" data-toggle="tooltip" data-placement="bottom"
                        title="120 >= value <= 250" onkeypress="return isValidNumeric(event)"
@@ -98,7 +97,7 @@
 
               <!-- Target blood sugar before the meal unit -->
               <div class="input-group">
-                <input type="number" min="80" max="120" id="std_tbs" name="std_tbs" class="form-control"
+                <input type="number" min="80" max="120" id="std_tbs" class="form-control"
                        placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon4"
                        data-toggle="tooltip" data-placement="bottom" title="80 >= value <= 120"
                        onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()"
@@ -111,7 +110,7 @@
               <!-- Individual sensitivity -->
               <!-- default = 50 -->
               <div class="input-group">
-                <input type="number" min="15" max="100" id="std_is" name="std_is" class="form-control"
+                <input type="number" min="15" max="100" id="std_is" class="form-control"
                        placeholder="Individual sensitivity" aria-describedby="sizing-addon5" data-toggle="tooltip"
                        data-placement="bottom" title="15 >= value <= 100 (default = 50)"
                        onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()"
@@ -187,7 +186,7 @@
               <br>
 
               <small>
-                  <b>Pleas fill, at least, two pairs of values per sample</b>
+                  <b>Please fill, at least, two pairs of values per sample</b>
                 </small>
 
               <br><br>
@@ -268,10 +267,10 @@
               <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs8"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                      onblur="enableButtonPersonal()">
-      _in="15" max="100" step="1" class="input-sample" id="dbs9"
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs9"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-              <input type="number" min="15" max="100" step="1" clas_s="input-sample" id="dbs10"
-                     onblur="enableButton   Personal()">
+                     onblur="enableButtonPersonal()">
+              <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs10"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                      onblur="enableButtonPersonal()">
 
@@ -297,13 +296,19 @@
           <div class="col-md-4" style="text-align: center;">
             <h4>Calculate Insulin Dose</h4>
               <input type="button" id="submit_std" value="Calculate" name="submit_std" onclick="submitStandard();">
-              <input type="button" id="submit_prs" value="Calculate" name="submit_prs">
-              <input type="button" id="submit_bg" value="Calculate" name="submit_bg">
+              <input type="button" id="submit_prs" value="Calculate" name="submit_prs" onclick="submitPersonal();">
+              <input type="button" id="submit_bg" value="Calculate" name="submit_bg" onclick="submitBackground();">
           </div>
         </div>
       </div>
       <div class="col-md-2"></div>
-    <!--</form>-->
+    </div>
+
+    <!-- window where it is showed the result of the calculation from the servlet side -->
+    <div class="row" id="results-window">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" id="results-col"></div>
+        <div class="col-md-2"></div>
     </div>
 
   </div>
@@ -321,6 +326,8 @@
           $("#standard-insulin").fadeIn("slow");
           $("#personal-insulin").fadeOut(1);
           $("#background-insulin").fadeOut(1);
+          $("#main-window").css({display:"block"});
+          $("#results-window").css({display:"none"});
           // buttons
           enableButtonStandard();
         });
@@ -329,6 +336,8 @@
           $("#standard-insulin").fadeOut(1);
           $("#personal-insulin").fadeIn("slow");
           $("#background-insulin").fadeOut(1);
+          $("#main-window").css({display:"block"});
+          $("#results-window").css({display:"none"});
           // buttons
           enableButtonPersonal();
         });
@@ -337,6 +346,8 @@
           $("#standard-insulin").fadeOut(1);
           $("#personal-insulin").fadeOut(1);
           $("#background-insulin").fadeIn("slow");
+          $("#main-window").css({display:"block"});
+          $("#results-window").css({display:"none"});
           // buttons
           enableButtonBackground();
         });
@@ -465,7 +476,13 @@
       }
 
       function submitStandard(){
-          var dataString = {"FLAG":"standard"};
+          var dataString = {"FLAG":"standard",
+                            "std_tgcm":$("#std_tgcm").val(),
+                            "std_tgcp":$("#std_tgcp").val(),
+                            "std_abs":$("#std_abs").val(),
+                            "std_tbs":$("#std_tbs").val(),
+                            "std_is":$("#std_is").val()
+                           };
           $.ajax({
               type: "GET",
               data: dataString,
@@ -474,9 +491,47 @@
 
                   if (data != null){
 
-                      tetas = JSON.parse(data);
+                      result = JSON.parse(data);
 
-                      window.alert(tetas.pilas);
+                      var webservices = result.num_webservices;
+                      var results = result.results;
+                      var majority = result.majority_result;
+
+                      // clear all input fields (exception for buttons)
+                      $(':input','#main-window')
+                              .not(':button')
+                              .val('');
+
+                      // hide the inputs window
+                      $("#main-window").css({display:"none"});
+
+                      var code_to_print = '<h3>Insulin Dose for Standard Insulin Sensitivity<h3>' +
+                                          '<br>' +
+                                          '<h1>' + majority + '</h1>' +
+                                          '<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Technical Detail</button>' +
+                                          '<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">' +
+                                            '<div class="modal-dialog modal-sm">' +
+                                                '<div class="modal-content">' +
+                                                    '<h3>Technical Detail</h3><br>' +
+                                                    '<b>Number of web services:</b> ' + webservices + '<br><br>';
+
+                                                    // print the value of each web service
+                                                    $.each(results, function(i,r){
+                                                        code_to_print += '<b>Web service ' + i + ':</b> ' + r + '<br>';
+                                                    });
+
+                                                    code_to_print += '<br><b>Majority result: </b>' + majority;
+                                                    code_to_print += '<br><br><button type="button" class="btn btn-default" data-dismiss="modal">Close</button><br><br>';
+                                code_to_print +='</div>' +
+                                            '</div>' +
+                                          '</div>';
+
+                      // clean the window content
+                      $("#results-col").empty();
+                      // fill with insulin dose and technical detail
+                      $("#results-col").append(code_to_print);
+
+                      $("#results-window").css({display:"block"});
 
                   }
               }
@@ -484,10 +539,121 @@
       }
 
       function submitPersonal(){
+          // Samples of physical activity level in a given day
+          var sample_pal = new Array();
+          // Samples of drops in blood sugar from one unit of insulin in that day
+          var sample_dbs = new Array();
 
+          for (i = 1; i < 11; i++) {
+              if( ($("#pal" + i).val() != '') && ($("#dbs" + i).val() != '') ){
+                  sample_pal.push($("#pal" + i).val());
+                  sample_dbs.push($("#dbs" + i).val());
+              }
+          }
+
+          var dataString = {"FLAG":"personal",
+                            "prs_tgcm":$("#prs_tgcm").val(),
+                            "prs_tgcp":$("#prs_tgcp").val(),
+                            "prs_abs":$("#prs_abs").val(),
+                            "prs_tbs":$("#prs_tbs").val(),
+                            "prs_is":$("#prs_is").val(),
+                            "sample_pal":JSON.stringify(sample_pal),
+                            "sample_dbs":JSON.stringify(sample_dbs)
+                           };
+          $.ajax({
+              type: "GET",
+              data: dataString,
+              url: "servlets/Servlet",
+              success:function(data) {
+
+                  if (data != null){
+
+                      result = JSON.parse(data);
+
+                      var webservices = result.num_webservices;
+                      var results = result.results;
+                      var majority = result.majority_result;
+
+                      // clear all input fields (exception for buttons)
+                      $(':input','#main-window')
+                              .not(':button')
+                              .val('');
+
+                      // hide the inputs window
+                      $("#main-window").css({display:"none"});
+
+                      var code_to_print = '<h3>Insulin Dose for Personal Insulin Sensitivity<h3>' +
+                                          '<br>' +
+                                          '<h1>' + majority + '</h1>' +
+                                          '<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Technical Detail</button>' +
+                                          '<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">' +
+                                            '<div class="modal-dialog modal-sm">' +
+                                                '<div class="modal-content">' +
+                                                    '<h3>Technical Detail</h3><br>' +
+                                                    '<b>Number of web services:</b> ' + webservices + '<br><br>';
+
+                                                    // print the value of each web service
+                                                    $.each(results, function(i,r){
+                                                        code_to_print += '<b>Web service ' + i + ':</b> ' + r + '<br>';
+                                                    });
+
+                                                    code_to_print += '<br><b>Majority result: </b>' + majority;
+                                                    code_to_print += '<br><br><button type="button" class="btn btn-default" data-dismiss="modal">Close</button><br><br>';
+                                code_to_print +='</div>' +
+                                            '</div>' +
+                                        '</div>';
+
+                      // clean the window content
+                      $("#results-col").empty();
+                      // fill with insulin dose and technical detail
+                      $("#results-col").append(code_to_print);
+
+                      $("#results-window").css({display:"block"});
+
+                  }
+              }
+          });
       }
 
       function submitBackground(){
+
+          var dataString = {"FLAG":"background"};
+          $.ajax({
+              type: "GET",
+              data: dataString,
+              url: "servlets/Servlet",
+              success:function(data) {
+
+                  if (data != null){
+
+                      result = JSON.parse(data);
+
+                      var webservices = result.num_webservices;
+                      var results = result.results;
+                      var majority = result.majority_result;
+
+                      // clear all input fields (exception for buttons)
+                      $(':input','#main-window')
+                              .not(':button')
+                              .val('');
+
+                      // hide the inputs window
+                      $("#main-window").css({display:"none"});
+
+                      var code_to_print = '<h3>Insulin Dose for Standard Insulin Sensitivity<h3>' +
+                              '<br>' +
+                              '<h1>' + majority + '</h1>';
+
+                      // clean the window content
+                      $("#results-col").empty();
+                      // fill with insulin dose and technical detail
+                      $("#results-col").append(code_to_print);
+
+                      $("#results-window").css({display:"block"});
+
+                  }
+              }
+          });
 
       }
 
