@@ -32,7 +32,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         // Individual sensitivity
         int std_is = Integer.parseInt(request.getParameter("std_is"));
 
-        // Techincal detail
+        // Technical detail
         TechnicalDetail t = new TechnicalDetail();
 
         t = voter.mealtimeInsulin(std_tgcm, std_tgcp, std_abs, std_tbs, std_is);
@@ -69,7 +69,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
             sample_dbs_int.add(Integer.parseInt(sample_dbs.get(i)));
         }
 
-        // Techincal detail
+        // Technical detail
         TechnicalDetail t = new TechnicalDetail();
 
         t = voter.personalSensitivityToInsulin(prs_tgcm, prs_tgcp, prs_tbs, prs_tbs, prs_pa, sample_pal_int, sample_dbs_int);
@@ -83,7 +83,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         // Weight in kilograms
         int bg_kg = Integer.parseInt(request.getParameter("bg_kg"));
 
-        // Techincal detail
+        // Technical detail
         TechnicalDetail t = new TechnicalDetail();
 
         t = voter.backgroundInsulin(bg_kg);
@@ -98,9 +98,6 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-
-        // redirect to doPost, just in case
-        // doPost(request, response);
 
         PrintWriter out = response.getWriter();
 

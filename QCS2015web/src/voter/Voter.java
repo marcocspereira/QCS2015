@@ -27,10 +27,16 @@ public class Voter {
 
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
-            BackgroundThread task = new BackgroundThread(urls[i], weight);
-            Future<Integer> future = pool.submit(task);
-            threads.add(future);
-            lista.add(future);
+            try {
+                BackgroundThread task = new BackgroundThread(urls[i], weight);
+                Future<Integer> future = pool.submit(task);
+                System.out.println(future);
+                threads.add(future);
+                lista.add(future);
+            }
+            catch (Exception e){
+                e.getCause();
+            }
         }
 
         //Timer for each thread
@@ -39,8 +45,8 @@ public class Voter {
             try {
                 System.out.println("Started...");
                 try {
-                    // 1 segundo por thread
-                    future.get(1, TimeUnit.SECONDS);
+                    // 0.7 segundos por thread
+                    future.get(700, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -72,10 +78,15 @@ public class Voter {
 
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
-            PersonalThread personalTask = new PersonalThread(urls[i], physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
-            Future<Integer> future = pool.submit(personalTask);
-            threads.add(future);
-            lista.add(future);
+            try {
+                PersonalThread personalTask = new PersonalThread(urls[i], physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
+                Future<Integer> future = pool.submit(personalTask);
+                threads.add(future);
+                lista.add(future);
+            }
+            catch(Exception e){
+                e.getCause();
+            }
         }
 
         //Timer for each thread
@@ -84,8 +95,8 @@ public class Voter {
             try {
                 System.out.println("Started...");
                 try {
-                    // 1 segundo por thread
-                    future.get(1, TimeUnit.SECONDS);
+                    // 0.7 segundo por thread
+                    future.get(700, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -118,16 +129,15 @@ public class Voter {
             try {
                 //System.out.println("Started..");
                 try {
-                    future.get(4, TimeUnit.SECONDS);
+                    future.get(700, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
-                //System.out.println("Finished!");
+                System.out.println("Finished!");
             } catch (TimeoutException e) {
-                //Se demora mais de 4 secs
-                //System.out.println("Terminated!");
+                System.out.println("Terminated!");
             }
 
             lista.add(future);
@@ -155,9 +165,9 @@ public class Voter {
 
         Arrays.fill(array_ocorrencia, -2);
 
-        td.setNum_webservices(numberThreads);
+        td.setNum_webservices(lista.size());
 
-        for(int i=0;i<numberThreads;i++){
+        for(int i=0;i<lista.size();i++){
             try {
                 temp.add(lista.get(i).get());
             } catch (InterruptedException e) {
@@ -193,17 +203,17 @@ public class Voter {
 
         int maxValue = 0;
         int maxIndex = 0;
-        for (int counter = 1; counter < occurences.size(); counter++)
-        {
-            if (occurences.get(counter) > maxValue)
-            {
+
+        for (int counter = 1; counter < occurences.size(); counter++) {
+
+            if (occurences.get(counter) > maxValue){
                 maxValue = occurences.get(counter);
                 maxIndex = counter;
             }
         }
+
         System.out.println(uniquesArray.get(maxIndex));
 
-        // falta o majority result
         td.setMajority_result(uniquesArray.get(maxIndex));
 
         lista.clear();
