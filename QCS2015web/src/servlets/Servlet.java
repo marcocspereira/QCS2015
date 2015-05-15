@@ -1,11 +1,13 @@
 package servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import results.TechnicalDetail;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
     private TechnicalDetail personalInsulin(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
+        Type type = new TypeToken<List<String>>(){}.getType();
+
         // Total grams of carbohydrates in the meal
         int prs_tgcm = Integer.parseInt(request.getParameter("prs_tgcm"));
         // Total grams of carbohydrates processed by 1 unit of rapid acting insulin
@@ -60,9 +64,9 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         // Today’s physical activity level
         int prs_pa = Integer.parseInt(request.getParameter("prs_is"));
         // Samples of physical activity level in a given day
-        List<String> sample_pal = new Gson().fromJson(request.getParameter("sample_pal"), List.class);
+        List<String> sample_pal = new Gson().fromJson(request.getParameter("sample_pal"), type);
         // Samples of drops in blood sugar from one unit of insulin in that day
-        List<String> sample_dbs = new Gson().fromJson(request.getParameter("sample_dbs"), List.class);
+        List<String> sample_dbs = new Gson().fromJson(request.getParameter("sample_dbs"), type);
 
         int size_of_samples = sample_pal.size();
         int sample_pal_int[] = new int[size_of_samples];
@@ -71,8 +75,6 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         for(i=0; i<size_of_samples; i++){
             sample_pal_int[i] = Integer.parseInt( sample_pal.get(i));
             sample_dbs_int[i] = Integer.parseInt(sample_dbs.get(i));
-            System.out.println("pal "+i+": "+ sample_pal_int[i]);
-            System.out.println("dbs "+i+": " + sample_dbs_int[i]);
         }
 
         // todo passar para o votador
