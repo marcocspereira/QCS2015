@@ -126,6 +126,7 @@ public class Voter {
         td.setResults(temp);
 
         // falta o majority result
+        td.setMajority_result(34);  // SLB 34º titulo
 
 
         // return chosen_val;

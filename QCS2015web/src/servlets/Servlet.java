@@ -101,25 +101,14 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
         // Weight in kilograms
         int bg_kg = Integer.parseInt(request.getParameter("bg_kg"));
-        int result;
 
         // instanciar objeto do tipo voter
         Voter voter = new Voter();
 
-        result = voter.backgroundInsulin(bg_kg);
-
-        // todo passar para o votador
-        // todo receber resposta
-
-        // testing technical detail * ELIMINAR *
-        List<Integer> l = new ArrayList<Integer>();
+        // Techincal detail
         TechnicalDetail t = new TechnicalDetail();
-        t.setNum_webservices(3);
-        l.add(22);
-        l.add(22);
-        l.add(23);
-        t.setResults(l);
-        t.setMajority_result(22);
+
+        t = voter.backgroundInsulin(bg_kg);
 
         // todo receber o technical detail do voter com os resultados para depois retornar para o cliente web
 
@@ -128,10 +117,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        /*
-        RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-        disp.forward(request, response);
-        */
+        
 
     }
 

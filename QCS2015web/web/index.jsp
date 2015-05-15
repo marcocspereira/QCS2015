@@ -201,36 +201,14 @@
 
             <br>
 
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal1"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal2"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal3"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal4"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal5"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal6"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal7"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal8"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal9"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="0" max="10" step="1" class="input-sample" id="pal10"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
+            <%
+                int i;
+                for(i=1; i<11; i++){
+                    out.print("<input type=\"number\" min=\"0\" max=\"10\" step=\"1\" class=\"input-sample\" id=\"pal" + i + "\"" +
+                            "onkeypress=\"return isValidNumeric(event)\" onkeyup=\"enableButtonPersonal()\" +" +
+                            "onblur=\"enableButtonPersonal()\">");
+                }
+            %>
 
             <br><br>
 
@@ -243,36 +221,13 @@
 
             <br>
 
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs1"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs2"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs3"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs4"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs5"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs6"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs7"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs8"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs9"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
-            <input type="number" min="15" max="100" step="1" class="input-sample" id="dbs10"
-                   onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                   onblur="enableButtonPersonal()">
+              <%
+                  for(i=1; i<11; i++){
+                      out.print("<input type=\"number\" min=\"15\" max=\"100\" step=\"1\" class=\"input-sample\" id=\"dbs" + i + "\"" +
+                              "onkeypress=\"return isValidNumeric(event)\" onkeyup=\"enableButtonPersonal()\" +" +
+                              "onblur=\"enableButtonPersonal()\">");
+                  }
+              %>
 
           </div>
 
