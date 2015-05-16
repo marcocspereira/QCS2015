@@ -20,6 +20,7 @@ public class Voter {
     private final int numberThreads = 5;                        // number of webservices
     ArrayList<Future<Integer>> lista = new ArrayList<Future<Integer>>();    //  valores (inteiros) devolvidos por cada web service
     ArrayList<Future<Integer>> threads = new ArrayList<Future<Integer>>();     //  guarda as threads criadas para ligar aos N web services
+    ArrayList<Integer>teste = new ArrayList<Integer>();
 
     public TechnicalDetail backgroundInsulin(int weight){
 
@@ -32,7 +33,7 @@ public class Voter {
                 Future<Integer> future = pool.submit(task);
                 System.out.println(future);
                 threads.add(future);
-                lista.add(future);
+                //lista.add(future);
             }
             catch (Exception e){
                 e.getCause();
@@ -52,13 +53,27 @@ public class Voter {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+                try {
+                    teste.add(future.get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Finished!");
             } catch (TimeoutException e) {
+                teste.add(-2);
                 System.out.println("Terminated!");
             }
         }
 
         pool.shutdownNow();
+
+        for(int i=0;i<5;i++){
+            System.out.println("Indice " + i + " " + teste.get(i));
+        }
+
+
 
         return chooser();
 
@@ -82,7 +97,7 @@ public class Voter {
                 PersonalThread personalTask = new PersonalThread(urls[i], physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
                 Future<Integer> future = pool.submit(personalTask);
                 threads.add(future);
-                lista.add(future);
+                //lista.add(future);
             }
             catch(Exception e){
                 e.getCause();
@@ -95,8 +110,15 @@ public class Voter {
             try {
                 System.out.println("Started...");
                 try {
-                    // 0.7 segundo por thread
+                    // 0.7 segundos por thread
                     future.get(700, TimeUnit.MILLISECONDS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    teste.add(future.get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -104,10 +126,9 @@ public class Voter {
                 }
                 System.out.println("Finished!");
             } catch (TimeoutException e) {
+                teste.add(-2);
                 System.out.println("Terminated!");
             }
-
-            lista.add(future);
         }
 
         pool.shutdownNow();
@@ -122,14 +143,20 @@ public class Voter {
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
-        for(int i=0;i<numberThreads;i++){
-
-            MealTimeThread task = new MealTimeThread(urls[i],carbohydrateAmount, carbohydrateToInsulinRatio, preMealBloodSugar, targetBloodSugar, personalSensitivity);
-            Future<Integer> future = pool.submit(task);
+        for(int i=0;i<numberThreads;i++) {
+            Future<Integer> future = threads.get(i);
             try {
-                //System.out.println("Started..");
+                System.out.println("Started...");
                 try {
+                    // 0.7 segundos por thread
                     future.get(700, TimeUnit.MILLISECONDS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    teste.add(future.get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -137,11 +164,9 @@ public class Voter {
                 }
                 System.out.println("Finished!");
             } catch (TimeoutException e) {
+                teste.add(-2);
                 System.out.println("Terminated!");
             }
-
-            lista.add(future);
-
         }
 
         pool.shutdownNow();
@@ -181,7 +206,7 @@ public class Voter {
         td.setResults(temp);
 
         Set<Integer> uniques = new HashSet<Integer>(temp);
-        ArrayList<Integer> uniquesArray = new ArrayList<>(uniques);
+        ArrayList<Integer> uniquesArray = new ArrayList<Integer>(uniques);
 
         List<Integer> occurences = Arrays.asList(new Integer[uniquesArray.size()]);
         Collections.fill(occurences, 0);

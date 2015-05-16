@@ -61,8 +61,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         List<String> sample_dbs = new Gson().fromJson(request.getParameter("sample_dbs"), type);
 
         int size_of_samples = sample_pal.size();
-        List<Integer> sample_pal_int = new ArrayList<>();
-        List<Integer> sample_dbs_int = new ArrayList<>();
+        List<Integer> sample_pal_int = new ArrayList<Integer>();
+        List<Integer> sample_dbs_int = new ArrayList<Integer>();
         int i;
         for(i=0; i<size_of_samples; i++){
             sample_pal_int.add(Integer.parseInt(sample_pal.get(i)));
