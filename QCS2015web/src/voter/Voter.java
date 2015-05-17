@@ -49,7 +49,7 @@ public class Voter {
                 System.out.println("Started...");
                 try {
                     // 0.7 segundos por thread
-                    future.get(700, TimeUnit.MILLISECONDS);
+                    future.get(800, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -151,7 +151,7 @@ public class Voter {
             try {
                 //System.out.println("Started..");
                 try {
-                    future.get(700, TimeUnit.MILLISECONDS);
+                    future.get(800, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

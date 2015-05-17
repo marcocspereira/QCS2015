@@ -107,6 +107,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         Gson gson = new Gson();
         String json;
 
+        long start_time = System.currentTimeMillis();
+
         // instanciar objeto do tipo voter
         Voter voter = new Voter();
 
@@ -115,16 +117,29 @@ public class Servlet extends javax.servlet.http.HttpServlet {
             if(request.getParameter("FLAG") != null){
 
                 String op = request.getParameter("FLAG");
-                System.out.println("Operation:" + op);
+                System.out.println("Operation: " + op);
 
-                if(op.equals("standard")){
-                    td = standardInsulin(voter, request, response);
-                }
-                else if(op.equals("personal")){
-                    td = personalInsulin(voter, request, response);
-                }
-                else if(op.equals("background")){
-                    td = backgroundInsulin(voter, request, response);
+                System.out.println("start: " + start_time);
+                while( (start_time+4000) > System.currentTimeMillis() ) {
+                    System.out.println("now: " + System.currentTimeMillis());
+                    try {
+                        if (op.equals("standard")) {
+                            td = standardInsulin(voter, request, response);
+                        } else if (op.equals("personal")) {
+                            td = personalInsulin(voter, request, response);
+                        } else if (op.equals("background")) {
+                            td = backgroundInsulin(voter, request, response);
+                        }
+
+                        if (td.getMajority_result()>=0){
+                            break;
+                        }
+
+                    }catch (Exception e){
+                        System.out.println("Unavailable Web Services ");
+                        td.setMajority_result(-2);
+                        break;
+                    }
                 }
 
                 json = gson.toJson(td);
