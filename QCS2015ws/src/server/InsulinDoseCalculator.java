@@ -56,7 +56,6 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
     public int personalSensitivityToInsulin(int physicalActivityLevel, int[] physicalActivitySamples, int[] bloodSugarDropSamples) {
 
         int i, arrayLength = physicalActivitySamples.length;
-        double alpha, beta;
 
         SimpleRegression regression = new SimpleRegression();
         try {
