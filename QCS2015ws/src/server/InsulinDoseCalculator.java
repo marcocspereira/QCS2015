@@ -26,10 +26,10 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
                 return 0;
             }
 
-            double carbohydrateDose = (double) carbohydrateAmount / carbohydrateToInsulinRatio / personalSensitivity * 50;
-            double highBloodSugarDose = (preMealBloodSugar - targetBloodSugar) / personalSensitivity;
+            double carbohydrateDose = (double) carbohydrateAmount / (double) carbohydrateToInsulinRatio / (double) personalSensitivity * 50.0;
+            double highBloodSugarDose = ((double) preMealBloodSugar - (double) targetBloodSugar) / (double) personalSensitivity;
 
-            return (int) (carbohydrateDose + highBloodSugarDose);
+            return (int) Math.round(carbohydrateDose + highBloodSugarDose);
         }
         catch(Exception e){
             System.err.println("Mealtime Insulin Dose error:" + e.getMessage());
@@ -42,7 +42,7 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
     public int backgroundInsulinDose(int bodyWeight) {
 
         try {
-            return (int) Math.round((0.55 * bodyWeight) / 2);
+            return (int) Math.round(0.55 * bodyWeight * 0.5);
         }
         catch (Exception e){
             System.err.println("Background Insulin Dose error:" + e.getMessage());
@@ -55,10 +55,14 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
     @WebMethod
     public int personalSensitivityToInsulin(int physicalActivityLevel, int[] physicalActivitySamples, int[] bloodSugarDropSamples) {
 
-        int i, arrayLength = physicalActivitySamples.length;
-
-        SimpleRegression regression = new SimpleRegression();
         try {
+            int i, arrayLength = physicalActivitySamples.length;
+
+            if (physicalActivitySamples.length != bloodSugarDropSamples.length)
+                return -1;
+
+            SimpleRegression regression = new SimpleRegression();
+
             for(i=0; i<arrayLength; i++) {
                 if(physicalActivitySamples[i] < 0 || physicalActivitySamples[i] > 10)
                     return -1;

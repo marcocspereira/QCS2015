@@ -50,6 +50,8 @@ public class MealTimeThread implements Callable<Integer> {
 
         result = proxy.mealtimeInsulinDose(carbohydrateAmount,carbohydrateToInsulinRatio,preMealBloodSugar,targetBloodSugar,personalSensitivity);
 
+        System.out.println("Address: " + address + " Result : " + result);
+
         return result;
 
     }

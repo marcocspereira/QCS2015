@@ -8,8 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.Callable;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Created by cmfsnts on 15/05/2015.
  */
@@ -51,7 +49,7 @@ public class BackgroundThread implements Callable<Integer>{
 
         result = proxy.backgroundInsulinDose(weight);
 
-        System.out.println("Adress = " + address + " result = " + result);
+        System.out.println("Address = " + address + " result = " + result);
         return result;
 
     }
