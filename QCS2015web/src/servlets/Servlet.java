@@ -88,6 +88,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
         t = voter.backgroundInsulin(bg_kg);
 
+        System.out.println("majority:" + t.getMajority_result());
+
         return t;
 
     }

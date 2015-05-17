@@ -507,9 +507,13 @@
           // todo e se nao vier um resultado? ver o codigo de erro e notificar user
 
           var code_to_print = '<h3>Insulin Dose for ' + insulinType + ' Insulin Sensitivity<h3>' +
-                  '<br>' +
-                  '<h1>' + majority + '</h1>' +
-                  '<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Technical Detail</button>' +
+                  '<br>';
+                  if(majority == -2){
+                    code_to_print += 'Time out';
+                  }else{
+                    code_to_print += '<h1>' + majority + '</h1>';
+                  }
+                  code_to_print += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Technical Detail</button>' +
                   '<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">' +
                   '<div class="modal-dialog modal-sm">' +
                   '<div class="modal-content">' +
@@ -522,6 +526,7 @@
           });
 
           code_to_print += '<br><b>Majority result: </b>' + majority;
+          code_to_print += '<br><br><small><b>-1:</b> Exception raised<br><b>-2:</b> Time out</small>';
           code_to_print += '<br><br><button type="button" class="btn btn-default" data-dismiss="modal">Close</button><br><br>';
           code_to_print +='</div>' +
                   '</div>' +
