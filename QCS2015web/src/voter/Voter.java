@@ -38,7 +38,7 @@ public class Voter {
                 // lista.add(future);
             }
             catch (Exception e){
-                e.getCause();
+                e.getMessage();
             }
         }
 
@@ -51,16 +51,16 @@ public class Voter {
                     // 0.7 segundos por thread
                     future.get(800, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 }
                 try {
                     lista.add(future.get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 }
                 System.out.println("Finished!");
             } catch (TimeoutException e) {
@@ -113,16 +113,16 @@ public class Voter {
                     // 0.7 segundo por thread
                     future.get(700, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 }
                 try {
                     lista.add(future.get());
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 }
                 System.out.println("Finished!");
             } catch (TimeoutException e) {
@@ -153,16 +153,16 @@ public class Voter {
                 try {
                     future.get(800, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 }
                 try {
                     lista.add(future.get());
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 }
                 System.out.println("Finished!");
             } catch (TimeoutException e) {

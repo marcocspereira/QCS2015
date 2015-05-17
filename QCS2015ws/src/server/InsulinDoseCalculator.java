@@ -1,5 +1,7 @@
 package server;
 
+import org.apache.commons.math3.stat.regression.SimpleRegression;
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
@@ -49,39 +51,25 @@ public class InsulinDoseCalculator implements InsulinDoseCalculatorInterface {
     }
 
     /* Determines an individual's sensitivity to one unit of insulin */
-    /* base: http://algs4.cs.princeton.edu/14analysis/LinearRegression.java.html */
+    /* base: https://commons.apache.org/math/apidocs/org/apache/commons/math3/stat/regression/SimpleRegression.html */
     @WebMethod
     public int personalSensitivityToInsulin(int physicalActivityLevel, int[] physicalActivitySamples, int[] bloodSugarDropSamples) {
 
         int i, arrayLength = physicalActivitySamples.length;
         double alpha, beta;
 
+        SimpleRegression regression = new SimpleRegression();
         try {
-            if (physicalActivitySamples.length != bloodSugarDropSamples.length) {
-                return -1;
+            for(i=0; i<arrayLength; i++) {
+                if(physicalActivitySamples[i] < 0 || physicalActivitySamples[i] > 10)
+                    return -1;
+                if(bloodSugarDropSamples[i] < 15 || bloodSugarDropSamples[i] > 100)
+                    return -1;
+                regression.addData((double) physicalActivitySamples[i], (double) bloodSugarDropSamples[i]);
             }
 
-            // first pass
-            double sumx = 0, sumy = 0;
+            return (int) Math.round(regression.predict((double) physicalActivityLevel));
 
-            for (i = 0; i < arrayLength; i++) {
-                sumx += physicalActivitySamples[i];
-                sumy += bloodSugarDropSamples[i];
-            }
-
-            double xbar = sumx / arrayLength;
-            double ybar = sumy / arrayLength;
-
-            // second pass: compute summary statistics
-            double xxbar = 0, yybar = 0, xybar = 0;
-            for (i = 0; i < arrayLength; i++) {
-                xxbar += (physicalActivitySamples[i] - xbar) * (physicalActivitySamples[i] - xbar);
-                xybar += (physicalActivitySamples[i] - xbar) * (bloodSugarDropSamples[i] - ybar);
-            }
-            beta = xybar / xxbar;
-            alpha = ybar - beta * xbar;
-
-            return (int) Math.round(alpha + beta * physicalActivityLevel);
         }
         catch(Exception e){
             System.err.println("Personal Sensitivity To Insulin error:" + e.getMessage());
