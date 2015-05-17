@@ -111,7 +111,7 @@ public class Voter {
                 System.out.println("Started...");
                 try {
                     // 0.7 segundo por thread
-                    future.get(700, TimeUnit.MILLISECONDS);
+                    future.get(800, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.getMessage();
                 } catch (ExecutionException e) {
@@ -178,7 +178,7 @@ public class Voter {
 
     }
 
-    // escolhe a maioria (em construcao)
+    // escolhe a maioria
     private TechnicalDetail chooser() {
 
         TechnicalDetail td = new TechnicalDetail();
@@ -216,6 +216,11 @@ public class Voter {
                     occurences.set(j, occurences.get( j )+1);
 //	                if (occurences.get( j ) >= 3) System.out.println(uniquesArray.get( j ));
                 }
+                if (temp.get(i) == uniquesArray.get( j ))
+                {
+                    occurences.set(j, occurences.get( j )+1);
+//	                if (occurences.get( j ) >= 3) System.out.println(uniquesArray.get( j ));
+                }
             }
         }
         System.out.println(temp);
@@ -227,7 +232,7 @@ public class Voter {
 
         for (int counter = 1; counter < occurences.size(); counter++) {
 
-            if (occurences.get(counter) > maxValue){
+            if (occurences.get(counter) > 3 && occurences.get(counter) > maxValue){
                 maxValue = occurences.get(counter);
                 maxIndex = counter;
             }

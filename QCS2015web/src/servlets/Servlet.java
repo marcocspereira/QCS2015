@@ -33,11 +33,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         int std_is = Integer.parseInt(request.getParameter("std_is"));
 
         // Technical detail
-        TechnicalDetail t = new TechnicalDetail();
+        return voter.mealtimeInsulin(std_tgcm, std_tgcp, std_abs, std_tbs, std_is);
 
-        t = voter.mealtimeInsulin(std_tgcm, std_tgcp, std_abs, std_tbs, std_is);
-
-        return t;
 
     }
 
@@ -70,11 +67,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         }
 
         // Technical detail
-        TechnicalDetail t = new TechnicalDetail();
+        return voter.personalSensitivityToInsulin(prs_tgcm, prs_tgcp, prs_tbs, prs_tbs, prs_pa, sample_pal_int, sample_dbs_int);
 
-        t = voter.personalSensitivityToInsulin(prs_tgcm, prs_tgcp, prs_tbs, prs_tbs, prs_pa, sample_pal_int, sample_dbs_int);
-
-        return t;
 
     }
 
@@ -84,13 +78,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         int bg_kg = Integer.parseInt(request.getParameter("bg_kg"));
 
         // Technical detail
-        TechnicalDetail t = new TechnicalDetail();
-
-        t = voter.backgroundInsulin(bg_kg);
-
-        System.out.println("majority:" + t.getMajority_result());
-
-        return t;
+        return voter.backgroundInsulin(bg_kg);
 
     }
 
@@ -130,8 +118,8 @@ public class Servlet extends javax.servlet.http.HttpServlet {
                         } else if (op.equals("background")) {
                             td = backgroundInsulin(voter, request, response);
                         }
-
-                        if (td.getMajority_result()>=0){
+                        System.out.println("caarago " + td.getMajority_result());
+                        if (td.getMajority_result()>0){
                             break;
                         }
 
