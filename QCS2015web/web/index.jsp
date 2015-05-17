@@ -509,7 +509,7 @@
           var code_to_print = '<h3>Insulin Dose for ' + insulinType + ' Insulin Sensitivity<h3>' +
                   '<br>';
                   if(majority == -2){
-                    code_to_print += 'Time out';
+                    code_to_print += '<h1>Time out</h1>';
                   }else{
                     code_to_print += '<h1>' + majority + '</h1>';
                   }
