@@ -244,7 +244,7 @@ public class Voter {
         int maxValue = 0;
         int maxIndex = 0;
 
-        for (int counter = 1; counter < occurences.size(); counter++) {
+        for (int counter = 0; counter < occurences.size(); counter++) {
 
             if (occurences.get(counter) > 3 && occurences.get(counter) > maxValue){
                 maxValue = occurences.get(counter);
