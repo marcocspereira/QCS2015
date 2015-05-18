@@ -19,6 +19,9 @@ import java.util.List;
 @WebServlet ("/servlets/Servlet")
 public class Servlet extends javax.servlet.http.HttpServlet {
 
+    private final int INVALID_INPUT = -3;
+    private final int TIMEOUT_CODE = -2;
+
     private TechnicalDetail standardInsulin(Voter voter, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         // Total grams of carbohydrates in the meal
@@ -31,6 +34,15 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         int std_tbs = Integer.parseInt(request.getParameter("std_tbs"));
         // Individual sensitivity
         int std_is = Integer.parseInt(request.getParameter("std_is"));
+
+        // validação de dados de input
+        if( !(std_tgcm>=60 && std_tgcm<=120) || !(std_tgcp>=10 && std_tgcp<=15)
+        || !(std_abs>=120 && std_abs<=250) || !(std_tbs>=80 && std_tbs<=120) || !(std_is>=15 && std_is<=100) ){
+            TechnicalDetail td = new TechnicalDetail();
+            td.setMajority_result(INVALID_INPUT);
+            td.setNum_webservices(0);
+            return td;
+        }
 
         // Technical detail
         return voter.mealtimeInsulin(std_tgcm, std_tgcp, std_abs, std_tbs, std_is);
@@ -66,6 +78,16 @@ public class Servlet extends javax.servlet.http.HttpServlet {
             sample_dbs_int.add(Integer.parseInt(sample_dbs.get(i)));
         }
 
+        // validação de dados de input
+        if( !(prs_tgcm>=60 && prs_tgcm<=120) || !(prs_tgcp>=10 && prs_tgcp<=15)
+                || !(prs_abs>=120 && prs_abs<=250) || !(prs_tbs>=80 && prs_tbs<=120) || !(prs_pa>=0 && prs_pa<=10)
+                || (sample_pal_int.size() != sample_dbs_int.size())){
+            TechnicalDetail td = new TechnicalDetail();
+            td.setMajority_result(INVALID_INPUT);
+            td.setNum_webservices(0);
+            return td;
+        }
+
         // Technical detail
         return voter.personalSensitivityToInsulin(prs_tgcm, prs_tgcp, prs_tbs, prs_tbs, prs_pa, sample_pal_int, sample_dbs_int);
 
@@ -76,6 +98,14 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
         // Weight in kilograms
         int bg_kg = Integer.parseInt(request.getParameter("bg_kg"));
+
+        // validação de dados de input
+        if( !(bg_kg>=40 && bg_kg<=130) ){
+            TechnicalDetail td = new TechnicalDetail();
+            td.setMajority_result(INVALID_INPUT);
+            td.setNum_webservices(0);
+            return td;
+        }
 
         // Technical detail
         return voter.backgroundInsulin(bg_kg);
@@ -118,14 +148,14 @@ public class Servlet extends javax.servlet.http.HttpServlet {
                         } else if (op.equals("background")) {
                             td = backgroundInsulin(voter, request, response);
                         }
-                        System.out.println("caarago " + td.getMajority_result());
+                        
                         if (td.getMajority_result()>0){
                             break;
                         }
 
                     }catch (Exception e){
                         System.out.println("Unavailable Web Services ");
-                        td.setMajority_result(-2);
+                        td.setMajority_result(TIMEOUT_CODE);
                         break;
                     }
                 }
