@@ -11,14 +11,27 @@ import java.util.concurrent.*;
  */
 public class Voter {
 
+    private final int NO_MAJORITY_CODE = -1;
     private final int TIMEOUT_CODE = -2;
 
     //Urls válidos e funçoes
     private final String[] urls = {"http://liis-lab.dei.uc.pt:8080/Server?wsdl",
-            "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
-            "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
-            "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
-            "http://qcs12.dei.uc.pt:8080/insulin?wsdl"};
+                                   "http://qcs01.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+                                   "http://qcs02.dei.uc.pt:8080/insulinDosage?wsdl",
+                                   "http://qcs04.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+                                   "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
+                                   "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
+                                   "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
+                                   "http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+                                   "http://qcs09.dei.uc.pt:8080/Insulin?wsdl",
+                                   "http://qcs10.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+                                   "http://qcs11.dei.uc.pt:8080/insulin?wsdl",
+                                   "http://qcs12.dei.uc.pt:8080/insulin?wsdl",
+                                   "http://qcs13.dei.uc.pt:8080/insulin?wsdl",
+                                   "http://qcs16.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+                                   "http://qcs18.dei.uc.pt:8080/insulin?wsdl",
+                                   "http://qcs19.dei.uc.pt/InsulinDoseCalculator/WebService?wsdl",
+                                   "http://qcs22.dei.uc.pt/InsulinDoseCalculator?wsdl"};
     private final int numberThreads = 5;                        // number of webservices
     // ArrayList<Future<Integer>> lista = new ArrayList<Future<Integer>>();    //  valores (inteiros) devolvidos por cada web service
     ArrayList<Integer> lista = new ArrayList<Integer>();    //  valores (inteiros) devolvidos por cada web service
@@ -179,6 +192,7 @@ public class Voter {
     }
 
     // escolhe a maioria
+    // todo retornar -1 se nao tiver maioria
     private TechnicalDetail chooser() {
 
         TechnicalDetail td = new TechnicalDetail();
@@ -191,7 +205,7 @@ public class Voter {
 
         int array_ocorrencia[] = new int[5];
 
-        Arrays.fill(array_ocorrencia, -2);
+        Arrays.fill(array_ocorrencia, TIMEOUT_CODE);
 
         td.setNum_webservices(lista.size());
 

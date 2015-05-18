@@ -514,6 +514,9 @@
                   else if(majority == -3) {
                     code_to_print += '<h1>Invalid input. Try again.</h1>';
                   }
+                  else if(majority == -4) {
+                    code_to_print += '<h1>A wild Exception appeared. Please, try again.</h1>';
+                  }
                   else
                   {
                     code_to_print += '<h1>' + majority + '</h1>';

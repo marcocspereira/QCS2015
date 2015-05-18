@@ -19,8 +19,10 @@ import java.util.List;
 @WebServlet ("/servlets/Servlet")
 public class Servlet extends javax.servlet.http.HttpServlet {
 
-    private final int INVALID_INPUT = -3;
+    private final int WILD_EXCEPTION_CODE = -4;
     private final int TIMEOUT_CODE = -2;
+    private final int INVALID_INPUT_CODE = -3;
+
 
     private TechnicalDetail standardInsulin(Voter voter, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
@@ -38,8 +40,9 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         // validação de dados de input
         if( !(std_tgcm>=60 && std_tgcm<=120) || !(std_tgcp>=10 && std_tgcp<=15)
         || !(std_abs>=120 && std_abs<=250) || !(std_tbs>=80 && std_tbs<=120) || !(std_is>=15 && std_is<=100) ){
+            System.out.println("A wild Input Exception appeared");
             TechnicalDetail td = new TechnicalDetail();
-            td.setMajority_result(INVALID_INPUT);
+            td.setMajority_result(INVALID_INPUT_CODE);
             td.setNum_webservices(0);
             return td;
         }
@@ -82,8 +85,9 @@ public class Servlet extends javax.servlet.http.HttpServlet {
         if( !(prs_tgcm>=60 && prs_tgcm<=120) || !(prs_tgcp>=10 && prs_tgcp<=15)
                 || !(prs_abs>=120 && prs_abs<=250) || !(prs_tbs>=80 && prs_tbs<=120) || !(prs_pa>=0 && prs_pa<=10)
                 || (sample_pal_int.size() != sample_dbs_int.size())){
+            System.out.println("A wild Input Exception appeared");
             TechnicalDetail td = new TechnicalDetail();
-            td.setMajority_result(INVALID_INPUT);
+            td.setMajority_result(INVALID_INPUT_CODE);
             td.setNum_webservices(0);
             return td;
         }
@@ -101,8 +105,9 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
         // validação de dados de input
         if( !(bg_kg>=40 && bg_kg<=130) ){
+            System.out.println("A wild Input Exception appeared");
             TechnicalDetail td = new TechnicalDetail();
-            td.setMajority_result(INVALID_INPUT);
+            td.setMajority_result(INVALID_INPUT_CODE);
             td.setNum_webservices(0);
             return td;
         }
@@ -121,7 +126,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
 
         PrintWriter out = response.getWriter();
 
-        TechnicalDetail td = null;
+        TechnicalDetail td = new TechnicalDetail(); td.setMajority_result(-100);
         Gson gson = new Gson();
         String json;
 
@@ -137,9 +142,10 @@ public class Servlet extends javax.servlet.http.HttpServlet {
                 String op = request.getParameter("FLAG");
                 System.out.println("Operation: " + op);
 
-                System.out.println("start: " + start_time);
+                boolean timeout = true;
+                // System.out.println("start: " + start_time);
                 while( (start_time+4000) > System.currentTimeMillis() ) {
-                    System.out.println("now: " + System.currentTimeMillis());
+                    // System.out.println("now: " + System.currentTimeMillis());
                     try {
                         if (op.equals("standard")) {
                             td = standardInsulin(voter, request, response);
@@ -148,16 +154,23 @@ public class Servlet extends javax.servlet.http.HttpServlet {
                         } else if (op.equals("background")) {
                             td = backgroundInsulin(voter, request, response);
                         }
-                        
-                        if (td.getMajority_result()>0){
+
+                        if (td.getMajority_result() >= 0 || td.getMajority_result() == INVALID_INPUT_CODE) {
+                            timeout = false;
                             break;
                         }
 
-                    }catch (Exception e){
-                        System.out.println("Unavailable Web Services ");
-                        td.setMajority_result(TIMEOUT_CODE);
+                    } catch (Exception e){
+                        System.out.println("A wild Exception appeared");
+                        td.setMajority_result(WILD_EXCEPTION_CODE);
+                        timeout = false;
                         break;
                     }
+                }
+
+                if(timeout){
+                    System.out.println("A wild Time Out appeared");
+                    td.setMajority_result(TIMEOUT_CODE);
                 }
 
                 json = gson.toJson(td);
