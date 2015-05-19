@@ -63,7 +63,7 @@
               <input type="number" min="60" max="120" id="std_tgcm"
                      class="form-control" placeholder="Total grams of carbohydrates in the meal"
                      aria-describedby="sizing-addon1" data-toggle="tooltip" data-placement="bottom"
-                     title="60 >= value <= 120" onkeypress="return isValidNumeric(event)"
+                     title="60 <= value <= 120" onkeypress="return isValidNumeric(event)"
                      onkeyup="enableButtonStandard()" onblur="enableButtonStandard()">
               <span class="input-group-addon" id="sizing-addon1">g</span>
             </div>
@@ -76,7 +76,7 @@
               <input type="number" min="10" max="15" id="std_tgcp"
                      class="form-control" placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin"
                      aria-describedby="sizing-addon2" data-toggle="tooltip" data-placement="bottom"
-                     title="10 >= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
+                     title="10 <= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
                      onkeyup="enableButtonStandard()" onblur="enableButtonStandard()">
               <span class="input-group-addon" id="sizing-addon2">g</span>
             </div>
@@ -88,7 +88,7 @@
               <input type="number" min="120" max="250" id="std_abs" class="form-control"
                      placeholder="Actual blood sugar level measured before the meal"
                      aria-describedby="sizing-addon3" data-toggle="tooltip" data-placement="bottom"
-                     title="120 >= value <= 250" onkeypress="return isValidNumeric(event)"
+                     title="120 <= value <= 250" onkeypress="return isValidNumeric(event)"
                      onkeyup="enableButtonStandard()" onblur="enableButtonStandard()">
               <span class="input-group-addon" id="sizing-addon3">mg/dL</span>
             </div>
@@ -99,7 +99,7 @@
             <div class="input-group">
               <input type="number" min="80" max="120" id="std_tbs" class="form-control"
                      placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon4"
-                     data-toggle="tooltip" data-placement="bottom" title="80 >= value <= 120"
+                     data-toggle="tooltip" data-placement="bottom" title="80 <= value <= 120"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()"
                      onblur="enableButtonStandard()">
               <span class="input-group-addon" id="sizing-addon4">mg/dL</span>
@@ -112,7 +112,7 @@
             <div class="input-group">
               <input type="number" min="15" max="100" id="std_is" class="form-control"
                      placeholder="Individual sensitivity" aria-describedby="sizing-addon5" data-toggle="tooltip"
-                     data-placement="bottom" title="15 >= value <= 100 (default = 50)"
+                     data-placement="bottom" title="15 <= value <= 100 (default = 50)"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonStandard()"
                      onblur="enableButtonStandard()">
               <span class="input-group-addon" id="sizing-addon5">unit</span>
@@ -127,7 +127,7 @@
             <div class="input-group">
               <input type="number" min="60" max="120" id="prs_tgcm" class="form-control"
                      placeholder="Total grams of carbohydrates in the meal" aria-describedby="sizing-addon6"
-                     data-toggle="tooltip" data-placement="bottom" title="60 >= value <= 120"
+                     data-toggle="tooltip" data-placement="bottom" title="60 <= value <= 120"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                      onblur="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon6">g</span>
@@ -141,7 +141,7 @@
               <input type="number" min="10" max="15" id="prs_tgcp" class="form-control"
                      placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin"
                      aria-describedby="sizing-addon7" data-toggle="tooltip" data-placement="bottom"
-                     title="10 >= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
+                     title="10 <= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
                      onkeyup="enableButtonPersonal()" onblur="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon7">g</span>
             </div>
@@ -153,7 +153,7 @@
               <input type="number" min="120" max="250" id="prs_abs" class="form-control"
                      placeholder="Actual blood sugar level measured before the meal"
                      aria-describedby="sizing-addon8" data-toggle="tooltip" data-placement="bottom"
-                     title="120 >= value <= 250" onkeypress="return isValidNumeric(event)"
+                     title="120 <= value <= 250" onkeypress="return isValidNumeric(event)"
                      onkeyup="enableButtonPersonal()" onblur="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon8">mg/dL</span>
             </div>
@@ -164,7 +164,7 @@
             <div class="input-group">
               <input type="number" min="80" max="120" id="prs_tbs" class="form-control"
                      placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon9"
-                     data-toggle="tooltip" data-placement="bottom" title="80 >= value <= 120"
+                     data-toggle="tooltip" data-placement="bottom" title="80 <= value <= 120"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                      onblur="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon9">mg/dL</span>
@@ -176,7 +176,7 @@
             <div class="input-group">
               <input type="number" min="0" max="10" id="prs_is" class="form-control"
                      placeholder="Today’s physical activity level" aria-describedby="sizing-addon11"
-                     data-toggle="tooltip" data-placement="bottom" title="0 >= value <= 10"
+                     data-toggle="tooltip" data-placement="bottom" title="0 <= value <= 10"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
                      onblur="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon10">unit</span>
@@ -213,7 +213,7 @@
 
             <small>
                   <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom"
-                        title="15mg/dl >= value <= 100mg/dl">
+                        title="15mg/dl <= value <= 100mg/dl">
                   </span>
               Samples of drops in blood sugar from one unit of insulin (between 15 and 100 mg/dl)
             </small>
@@ -237,7 +237,7 @@
             <div class="input-group">
               <input type="number" min="40" max="130" name="bg_kg" id="bg_kg" class="form-control"
                      placeholder="Weight in kilograms" aria-describedby="sizing-addon11"
-                     data-toggle="tooltip" data-placement="bottom" title="40 >= value <= 130"
+                     data-toggle="tooltip" data-placement="bottom" title="40 <= value <= 130"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonBackground()"
                      onblur="enableButtonBackground()">
               <span class="input-group-addon" id="sizing-addon11">Kg</span>
