@@ -240,15 +240,14 @@ public class Voter {
         {
             for (int j = 0; j < uniquesArray.size(); j++)
             {
-                if (temp.get(i) == uniquesArray.get( j ) || temp.get(i)-1 == uniquesArray.get( j ) || temp.get(i)+1 == uniquesArray.get( j ))
+                if (uniquesArray.get(j) >= 0 && temp.get(i) == uniquesArray.get(j) || temp.get(i)-1 == uniquesArray.get(j) || temp.get(i)+1 == uniquesArray.get(j))
                 {
-                    occurences.set(j, occurences.get( j )+1);
-//	                if (occurences.get( j ) >= 3) System.out.println(uniquesArray.get( j ));
+                    occurences.set(j, occurences.get(j)+1);
+//		                if (occurences.get(j) >= 3) System.out.println(uniquesArray.get(j));
                 }
-                if (temp.get(i) == uniquesArray.get( j ))
+                if (uniquesArray.get(j) >= 0 && temp.get(i) == uniquesArray.get(j))
                 {
-                    occurences.set(j, occurences.get( j )+1);
-//	                if (occurences.get( j ) >= 3) System.out.println(uniquesArray.get( j ));
+                    occurences.set(j, occurences.get(j)+1);
                 }
             }
         }
