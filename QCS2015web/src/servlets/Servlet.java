@@ -5,6 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import results.TechnicalDetail;
 import voter.Voter;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;

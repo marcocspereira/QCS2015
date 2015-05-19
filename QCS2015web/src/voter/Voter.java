@@ -18,12 +18,35 @@ public class Voter {
     private final int TIMEOUT = 3000;
 
     //Urls válidos e funçoes
-    private String[] urls = {
-            "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
-            "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
-            "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
-            "http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
-            "http://qcs12.dei.uc.pt:8080/insulin?wsdl"};
+    ArrayList<String> urls = new ArrayList<String>();
+
+    public Voter(){
+        urls.add("http://liis-lab.dei.uc.pt:8080/Server?wsdl");
+        urls.add("http://qcs01.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
+        urls.add("http://qcs02.dei.uc.pt:8080/insulinDosage?wsdl");
+        urls.add("http://qcs04.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
+        urls.add("http://qcs05.dei.uc.pt:8080/insulin?wsdl");
+        urls.add("http://qcs06.dei.uc.pt:8080/insulin?wsdl");
+        urls.add("http://qcs07.dei.uc.pt:8080/insulin?wsdl");
+        urls.add("http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
+        urls.add("http://qcs09.dei.uc.pt:8080/Insulin?wsdl");
+        urls.add("http://qcs10.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
+        urls.add("http://qcs11.dei.uc.pt:8080/insulin?wsdl");
+        urls.add("http://qcs12.dei.uc.pt:8080/insulin?wsdl");
+        urls.add("http://qcs13.dei.uc.pt:8080/insulin?wsdl");
+        urls.add("http://qcs16.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
+        urls.add("http://qcs18.dei.uc.pt:8080/insulin?wsdl");
+        urls.add("http://qcs19.dei.uc.pt/InsulinDoseCalculator/WebService?wsdl");
+        urls.add("http://qcs22.dei.uc.pt/InsulinDoseCalculator?wsdl");
+    }
+
+
+//    private String[] urls = {
+//            "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
+//            "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
+//            "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
+//            "http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+//            "http://qcs12.dei.uc.pt:8080/insulin?wsdl"};
 
 //    private final String[] urls = {"http://liis-lab.dei.uc.pt:8080/Server?wsdl",
 //                                   "http://qcs01.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
@@ -49,12 +72,14 @@ public class Voter {
 
     public TechnicalDetail backgroundInsulin(int weight){
 
+        Collections.shuffle(urls);
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
             try {
-                BackgroundThread task = new BackgroundThread(urls[i], weight);
+                BackgroundThread task = new BackgroundThread(urls.get(i), weight);
+//                BackgroundThread task = new BackgroundThread(urls[i], weight);
                 Future<Integer> future = pool.submit(task);
                 System.out.println(future);
                 threads.add(future);
@@ -71,14 +96,7 @@ public class Voter {
             try {
                 System.out.println("Started...");
                 try {
-                    // 0.7 segundos por thread
                     future.get(TIMEOUT, TimeUnit.MILLISECONDS);
-                } catch (InterruptedException e) {
-                    e.getMessage();
-                } catch (ExecutionException e) {
-                    e.getMessage();
-                }
-                try {
                     lista.add(future.get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -94,7 +112,7 @@ public class Voter {
 
         pool.shutdownNow();
 
-        for(int i=0;i<5;i++){
+        for(int i=0;i<lista.size();i++){
             System.out.println("Index " + i + " " + lista.get(i));
         }
 
@@ -111,14 +129,15 @@ public class Voter {
                                                         List<Integer> bloodSugarDropSamples){
 
         int individualSensitivity;
-
+        Collections.shuffle(urls);
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
 
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
             try {
-                PersonalThread personalTask = new PersonalThread(urls[i], physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
+                PersonalThread personalTask = new PersonalThread(urls.get(i), physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
+//                PersonalThread personalTask = new PersonalThread(urls[i], physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
                 Future<Integer> future = pool.submit(personalTask);
                 threads.add(future);
                 // lista.add(future);
@@ -130,27 +149,22 @@ public class Voter {
 
         //Timer for each thread
         for(int i=0;i<numberThreads;i++) {
+            String url = urls.get(i);
             Future<Integer> future = threads.get(i);
             try {
-                System.out.println("Started... "+urls[i]);
+                System.out.println("Started... "+url);
                 try {
                     future.get(TIMEOUT, TimeUnit.MILLISECONDS);
-                } catch (InterruptedException e) {
-                    e.getMessage();
-                } catch (ExecutionException e) {
-                    e.getMessage();
-                }
-                try {
                     lista.add(future.get());
+                    System.out.println("Finished! "+url);
                 } catch (InterruptedException e) {
                     e.getMessage();
                 } catch (ExecutionException e) {
                     e.getMessage();
                 }
-                System.out.println("Finished! "+urls[i]);
             } catch (TimeoutException e) {
                 lista.add(TIMEOUT_CODE);
-                System.out.println("Terminated! "+urls[i]);
+                System.out.println("Terminated! "+url);
             }
 
         }
@@ -164,15 +178,16 @@ public class Voter {
 
 
     public TechnicalDetail mealtimeInsulin(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity){
+        Collections.shuffle(urls);
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
-
         for(int i=0;i<numberThreads;i++){
+            String url = urls.get(i);
 
-            MealTimeThread task = new MealTimeThread(urls[i],carbohydrateAmount, carbohydrateToInsulinRatio, preMealBloodSugar, targetBloodSugar, personalSensitivity);
+            MealTimeThread task = new MealTimeThread(url,carbohydrateAmount, carbohydrateToInsulinRatio, preMealBloodSugar, targetBloodSugar, personalSensitivity);
             Future<Integer> future = pool.submit(task);
             try {
-                System.out.println("Started.. "+urls[i]);
+                System.out.println("Started.. "+url);
                 try {
                     future.get(TIMEOUT, TimeUnit.MILLISECONDS);
                     lista.add(future.get());
@@ -181,10 +196,10 @@ public class Voter {
                 } catch (ExecutionException e) {
                     e.getMessage();
                 }
-                System.out.println("Finished! "+urls[i]);
+                System.out.println("Finished! "+url);
             } catch (TimeoutException e) {
                 lista.add(TIMEOUT_CODE);
-                System.out.println("Terminated! "+urls[i]);
+                System.out.println("Terminated! "+url);
             }
 
         }
@@ -213,8 +228,17 @@ public class Voter {
 
         td.setNum_webservices(lista.size());
 
+        int counter = 0;
         for(int i=0;i<lista.size();i++){
             temp.add(lista.get(i));
+            if (lista.get(i) < 0)
+                counter++;
+        }
+//        Se tiver 3 respontas negativas
+        if (counter >=3)
+        {
+            td.setMajority_result(NO_MAJORITY_CODE);
+            return td;
         }
 
         td.setResults(temp);
@@ -247,7 +271,7 @@ public class Voter {
         int maxValue = 0;
         int maxIndex = -1;
 
-        for (int counter = 0; counter < occurences.size(); counter++) {
+        for (counter = 0; counter < occurences.size(); counter++) {
 
             if (occurences.get(counter) >= 5 && occurences.get(counter) > maxValue){
                 maxValue = occurences.get(counter);
@@ -261,8 +285,7 @@ public class Voter {
             td.setMajority_result(uniquesArray.get(maxIndex));
         }
         else {
-            System.out.println("s");
-//            td.setMajority_result(0);
+            System.out.println(maxIndex);
             td.setMajority_result(maxIndex);
         }
 
