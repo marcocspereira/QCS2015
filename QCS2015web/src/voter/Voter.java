@@ -71,7 +71,7 @@ public class Voter {
 
     public TechnicalDetail backgroundInsulin(int weight){
 
-        Collections.shuffle(urls);
+//        Collections.shuffle(urls);
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
         // criar as threads
@@ -128,7 +128,7 @@ public class Voter {
                                                         List<Integer> bloodSugarDropSamples){
 
         int individualSensitivity;
-        Collections.shuffle(urls);
+//        Collections.shuffle(urls);
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
 
@@ -177,7 +177,7 @@ public class Voter {
 
 
     public TechnicalDetail mealtimeInsulin(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity){
-        Collections.shuffle(urls);
+//        Collections.shuffle(urls);
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
         for(int i=0;i<numberThreads;i++){
@@ -216,15 +216,6 @@ public class Voter {
         TechnicalDetail td = new TechnicalDetail();
         ArrayList<Integer> temp = new ArrayList<Integer>();
 
-        //check for voters/2 + 1 for majority
-        int chosen_val = 0;
-        int count = 0;
-        int location = 0;
-
-        int array_ocorrencia[] = new int[5];
-
-        Arrays.fill(array_ocorrencia, TIMEOUT_CODE);
-
         td.setNum_webservices(lista.size());
 
         int counter = 0;
@@ -252,11 +243,12 @@ public class Voter {
         {
             for (int j = 0; j < uniquesArray.size(); j++)
             {
+//                ocorrencia +  ocorrencia com erro
                 if (uniquesArray.get(j) >= 0 && temp.get(i) == uniquesArray.get(j) || temp.get(i)-1 == uniquesArray.get(j) || temp.get(i)+1 == uniquesArray.get(j))
                 {
                     occurences.set(j, occurences.get(j)+1);
-//		                if (occurences.get(j) >= 3) System.out.println(uniquesArray.get(j));
                 }
+//                ocorrencia
                 if (uniquesArray.get(j) >= 0 && temp.get(i) == uniquesArray.get(j))
                 {
                     occurences.set(j, occurences.get(j)+1);
