@@ -13,8 +13,7 @@ public class Voter {
 
     private final int NO_MAJORITY_CODE = -1;
     private final int TIMEOUT_CODE = -2;
-
-    // 0.7 segundos por thread
+    
     private final int TIMEOUT = 3000;
 
     //Urls válidos e funçoes
@@ -71,7 +70,6 @@ public class Voter {
             try {
                 System.out.println("Started...");
                 try {
-                    // 0.7 segundos por thread
                     future.get(TIMEOUT, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.getMessage();
