@@ -119,6 +119,8 @@ public class Voter {
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
+        shuffleArray(urls);
+
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
             try {
@@ -171,6 +173,8 @@ public class Voter {
     public TechnicalDetail mealtimeInsulin(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity){
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
+
+        shuffleArray(urls);
 
         for(int i=0;i<numberThreads;i++){
 
