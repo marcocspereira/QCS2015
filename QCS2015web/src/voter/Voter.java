@@ -13,8 +13,7 @@ public class Voter {
 
     private final int NO_MAJORITY_CODE = -1;
     private final int TIMEOUT_CODE = -2;
-
-    // 0.7 segundos por thread
+    
     private final int TIMEOUT = 3000;
 
     //Urls válidos e funçoes
