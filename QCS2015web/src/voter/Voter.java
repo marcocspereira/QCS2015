@@ -41,6 +41,8 @@ public class Voter {
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
+        shuffleArray(urls);
+
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
             try {
@@ -90,6 +92,19 @@ public class Voter {
 
         return chooser();
 
+    }
+
+    static void shuffleArray(String[] ar)
+    {
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            String a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
     }
 
     public TechnicalDetail personalSensitivityToInsulin(int carbohydrateAmount,
