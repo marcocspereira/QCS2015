@@ -129,7 +129,7 @@
                      placeholder="Total grams of carbohydrates in the meal" aria-describedby="sizing-addon6"
                      data-toggle="tooltip" data-placement="bottom" title="60 <= value <= 120"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                     onblur="enableButtonPersonal()">
+                     onblur="enableButtonPersonal()" onchange="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon6">g</span>
             </div>
 
@@ -142,7 +142,7 @@
                      placeholder="Total grams of carbohydrates processed by 1 unit of rapid acting insulin"
                      aria-describedby="sizing-addon7" data-toggle="tooltip" data-placement="bottom"
                      title="10 <= value <= 15 (default = 12)" onkeypress="return isValidNumeric(event)"
-                     onkeyup="enableButtonPersonal()" onblur="enableButtonPersonal()">
+                     onkeyup="enableButtonPersonal()" onblur="enableButtonPersonal()" onchange="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon7">g</span>
             </div>
 
@@ -154,7 +154,7 @@
                      placeholder="Actual blood sugar level measured before the meal"
                      aria-describedby="sizing-addon8" data-toggle="tooltip" data-placement="bottom"
                      title="120 <= value <= 250" onkeypress="return isValidNumeric(event)"
-                     onkeyup="enableButtonPersonal()" onblur="enableButtonPersonal()">
+                     onkeyup="enableButtonPersonal()" onblur="enableButtonPersonal()" onchange="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon8">mg/dL</span>
             </div>
 
@@ -166,7 +166,7 @@
                      placeholder="Target blood sugar before the meal unit" aria-describedby="sizing-addon9"
                      data-toggle="tooltip" data-placement="bottom" title="80 <= value <= 120"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                     onblur="enableButtonPersonal()">
+                     onblur="enableButtonPersonal()" onchange="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon9">mg/dL</span>
             </div>
 
@@ -178,7 +178,7 @@
                      placeholder="Today’s physical activity level" aria-describedby="sizing-addon11"
                      data-toggle="tooltip" data-placement="bottom" title="0 <= value <= 10"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonPersonal()"
-                     onblur="enableButtonPersonal()">
+                     onblur="enableButtonPersonal()" onchange="enableButtonPersonal()">
               <span class="input-group-addon" id="sizing-addon10">unit</span>
             </div>
 
@@ -205,6 +205,7 @@
                 for(i=1; i<11; i++){
                     out.print("<input type=\"number\" min=\"0\" max=\"10\" step=\"1\" class=\"input-sample\" id=\"pal" + i + "\"" +
                             "onkeypress=\"return isValidNumeric(event)\" onkeyup=\"enableButtonPersonal()\" +" +
+                            "onchange=\"enableButtonPersonal()\"" +
                             "onblur=\"enableButtonPersonal()\">");
                 }
             %>
@@ -224,6 +225,7 @@
                   for(i=1; i<11; i++){
                       out.print("<input type=\"number\" min=\"15\" max=\"100\" step=\"1\" class=\"input-sample\" id=\"dbs" + i + "\"" +
                               "onkeypress=\"return isValidNumeric(event)\" onkeyup=\"enableButtonPersonal()\" +" +
+                              "onchange=\"enableButtonPersonal()\"" +
                               "onblur=\"enableButtonPersonal()\">");
                   }
               %>
@@ -239,7 +241,7 @@
                      placeholder="Weight in kilograms" aria-describedby="sizing-addon11"
                      data-toggle="tooltip" data-placement="bottom" title="40 <= value <= 130"
                      onkeypress="return isValidNumeric(event)" onkeyup="enableButtonBackground()"
-                     onblur="enableButtonBackground()">
+                     onblur="enableButtonBackground()" onchange="enableButtonBackground()" >
               <span class="input-group-addon" id="sizing-addon11">Kg</span>
             </div>
 
