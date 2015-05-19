@@ -6,6 +6,7 @@ import results.TechnicalDetail;
 import voter.Voter;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
@@ -161,6 +162,7 @@ public class Servlet extends javax.servlet.http.HttpServlet {
                         }
 
                     } catch (Exception e){
+                        e.printStackTrace();
                         System.out.println("A wild Exception appeared");
                         td.setMajority_result(WILD_EXCEPTION_CODE);
                         timeout = false;

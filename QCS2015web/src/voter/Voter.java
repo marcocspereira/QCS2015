@@ -14,24 +14,34 @@ public class Voter {
     private final int NO_MAJORITY_CODE = -1;
     private final int TIMEOUT_CODE = -2;
 
+    // 0.7 segundos por thread
+    private final int TIMEOUT = 3000;
+
     //Urls válidos e funçoes
-    private final String[] urls = {"http://liis-lab.dei.uc.pt:8080/Server?wsdl",
-                                   "http://qcs01.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
-                                   "http://qcs02.dei.uc.pt:8080/insulinDosage?wsdl",
-                                   "http://qcs04.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
-                                   "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
-                                   "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
-                                   "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
-                                   "http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
-                                   "http://qcs09.dei.uc.pt:8080/Insulin?wsdl",
-                                   "http://qcs10.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
-                                   "http://qcs11.dei.uc.pt:8080/insulin?wsdl",
-                                   "http://qcs12.dei.uc.pt:8080/insulin?wsdl",
-                                   "http://qcs13.dei.uc.pt:8080/insulin?wsdl",
-                                   "http://qcs16.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
-                                   "http://qcs18.dei.uc.pt:8080/insulin?wsdl",
-                                   "http://qcs19.dei.uc.pt/InsulinDoseCalculator/WebService?wsdl",
-                                   "http://qcs22.dei.uc.pt/InsulinDoseCalculator?wsdl"};
+    private String[] urls = {
+            "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
+            "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
+            "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
+            "http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+            "http://qcs12.dei.uc.pt:8080/insulin?wsdl"};
+
+//    private final String[] urls = {"http://liis-lab.dei.uc.pt:8080/Server?wsdl",
+//                                   "http://qcs01.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+//                                   "http://qcs02.dei.uc.pt:8080/insulinDosage?wsdl",
+//                                   "http://qcs04.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+//                                   "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
+//                                   "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
+//                                   "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
+//                                   "http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+//                                   "http://qcs09.dei.uc.pt:8080/Insulin?wsdl",
+//                                   "http://qcs10.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+//                                   "http://qcs11.dei.uc.pt:8080/insulin?wsdl",
+//                                   "http://qcs12.dei.uc.pt:8080/insulin?wsdl",
+//                                   "http://qcs13.dei.uc.pt:8080/insulin?wsdl",
+//                                   "http://qcs16.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+//                                   "http://qcs18.dei.uc.pt:8080/insulin?wsdl",
+//                                   "http://qcs19.dei.uc.pt/InsulinDoseCalculator/WebService?wsdl",
+//                                   "http://qcs22.dei.uc.pt/InsulinDoseCalculator?wsdl"};
     private final int numberThreads = 5;                        // number of webservices
     // ArrayList<Future<Integer>> lista = new ArrayList<Future<Integer>>();    //  valores (inteiros) devolvidos por cada web service
     ArrayList<Integer> lista = new ArrayList<Integer>();    //  valores (inteiros) devolvidos por cada web service
@@ -40,8 +50,6 @@ public class Voter {
     public TechnicalDetail backgroundInsulin(int weight){
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
-
-        shuffleArray(urls);
 
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
@@ -64,7 +72,7 @@ public class Voter {
                 System.out.println("Started...");
                 try {
                     // 0.7 segundos por thread
-                    future.get(800, TimeUnit.MILLISECONDS);
+                    future.get(TIMEOUT, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.getMessage();
                 } catch (ExecutionException e) {
@@ -94,19 +102,6 @@ public class Voter {
 
     }
 
-    static void shuffleArray(String[] ar)
-    {
-        Random rnd = new Random();
-        for (int i = ar.length - 1; i > 0; i--)
-        {
-            int index = rnd.nextInt(i + 1);
-            // Simple swap
-            String a = ar[index];
-            ar[index] = ar[i];
-            ar[i] = a;
-        }
-    }
-
     public TechnicalDetail personalSensitivityToInsulin(int carbohydrateAmount,
                                                         int carbohydrateToInsulinRatio,
                                                         int preMealBloodSugar,
@@ -119,7 +114,6 @@ public class Voter {
 
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
-        shuffleArray(urls);
 
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
@@ -138,10 +132,9 @@ public class Voter {
         for(int i=0;i<numberThreads;i++) {
             Future<Integer> future = threads.get(i);
             try {
-                System.out.println("Started...");
+                System.out.println("Started... "+urls[i]);
                 try {
-                    // 0.7 segundo por thread
-                    future.get(800, TimeUnit.MILLISECONDS);
+                    future.get(TIMEOUT, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.getMessage();
                 } catch (ExecutionException e) {
@@ -154,10 +147,10 @@ public class Voter {
                 } catch (ExecutionException e) {
                     e.getMessage();
                 }
-                System.out.println("Finished!");
+                System.out.println("Finished! "+urls[i]);
             } catch (TimeoutException e) {
                 lista.add(TIMEOUT_CODE);
-                System.out.println("Terminated!");
+                System.out.println("Terminated! "+urls[i]);
             }
 
         }
@@ -171,35 +164,27 @@ public class Voter {
 
 
     public TechnicalDetail mealtimeInsulin(int carbohydrateAmount, int carbohydrateToInsulinRatio, int preMealBloodSugar, int targetBloodSugar, int personalSensitivity){
-
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
-        shuffleArray(urls);
 
         for(int i=0;i<numberThreads;i++){
 
             MealTimeThread task = new MealTimeThread(urls[i],carbohydrateAmount, carbohydrateToInsulinRatio, preMealBloodSugar, targetBloodSugar, personalSensitivity);
             Future<Integer> future = pool.submit(task);
             try {
-                //System.out.println("Started..");
+                System.out.println("Started.. "+urls[i]);
                 try {
-                    future.get(800, TimeUnit.MILLISECONDS);
-                } catch (InterruptedException e) {
-                    e.getMessage();
-                } catch (ExecutionException e) {
-                    e.getMessage();
-                }
-                try {
+                    future.get(TIMEOUT, TimeUnit.MILLISECONDS);
                     lista.add(future.get());
                 } catch (InterruptedException e) {
                     e.getMessage();
                 } catch (ExecutionException e) {
                     e.getMessage();
                 }
-                System.out.println("Finished!");
+                System.out.println("Finished! "+urls[i]);
             } catch (TimeoutException e) {
                 lista.add(TIMEOUT_CODE);
-                System.out.println("Terminated!");
+                System.out.println("Terminated! "+urls[i]);
             }
 
         }
@@ -260,19 +245,26 @@ public class Voter {
         System.out.println(Arrays.toString(occurences.toArray()));
 
         int maxValue = 0;
-        int maxIndex = 0;
+        int maxIndex = -1;
 
         for (int counter = 0; counter < occurences.size(); counter++) {
 
-            if (occurences.get(counter) > 3 && occurences.get(counter) > maxValue){
+            if (occurences.get(counter) >= 5 && occurences.get(counter) > maxValue){
                 maxValue = occurences.get(counter);
                 maxIndex = counter;
             }
         }
 
-        System.out.println(uniquesArray.get(maxIndex));
-
-        td.setMajority_result(uniquesArray.get(maxIndex));
+        if (maxIndex != -1 )
+        {
+            System.out.println(uniquesArray.get(maxIndex));
+            td.setMajority_result(uniquesArray.get(maxIndex));
+        }
+        else {
+            System.out.println("s");
+//            td.setMajority_result(0);
+            td.setMajority_result(maxIndex);
+        }
 
         lista.clear();
 
