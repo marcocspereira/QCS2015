@@ -17,35 +17,14 @@ public class Voter {
     private final int TIMEOUT = 3000;
 
     //Urls válidos e funçoes
-    ArrayList<String> urls = new ArrayList<String>();
+//    ArrayList<String> urls = new ArrayList<String>();
 
-    public Voter(){
-        urls.add("http://liis-lab.dei.uc.pt:8080/Server?wsdl");
-        urls.add("http://qcs01.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
-        urls.add("http://qcs02.dei.uc.pt:8080/insulinDosage?wsdl");
-        urls.add("http://qcs04.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
-        urls.add("http://qcs05.dei.uc.pt:8080/insulin?wsdl");
-        urls.add("http://qcs06.dei.uc.pt:8080/insulin?wsdl");
-        urls.add("http://qcs07.dei.uc.pt:8080/insulin?wsdl");
-        urls.add("http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
-        urls.add("http://qcs09.dei.uc.pt:8080/Insulin?wsdl");
-        urls.add("http://qcs10.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
-        urls.add("http://qcs11.dei.uc.pt:8080/insulin?wsdl");
-        urls.add("http://qcs12.dei.uc.pt:8080/insulin?wsdl");
-        urls.add("http://qcs13.dei.uc.pt:8080/insulin?wsdl");
-        urls.add("http://qcs16.dei.uc.pt:8080/InsulinDoseCalculator?wsdl");
-        urls.add("http://qcs18.dei.uc.pt:8080/insulin?wsdl");
-        urls.add("http://qcs19.dei.uc.pt/InsulinDoseCalculator/WebService?wsdl");
-        urls.add("http://qcs22.dei.uc.pt/InsulinDoseCalculator?wsdl");
-    }
-
-
-//    private String[] urls = {
-//            "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
-//            "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
-//            "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
-//            "http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
-//            "http://qcs12.dei.uc.pt:8080/insulin?wsdl"};
+    private String[] urls = {
+            "http://qcs05.dei.uc.pt:8080/insulin?wsdl",
+            "http://qcs06.dei.uc.pt:8080/insulin?wsdl",
+            "http://qcs07.dei.uc.pt:8080/insulin?wsdl",
+            "http://qcs08.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
+            "http://qcs12.dei.uc.pt:8080/insulin?wsdl"};
 
 //    private final String[] urls = {"http://liis-lab.dei.uc.pt:8080/Server?wsdl",
 //                                   "http://qcs01.dei.uc.pt:8080/InsulinDoseCalculator?wsdl",
@@ -64,6 +43,7 @@ public class Voter {
 //                                   "http://qcs18.dei.uc.pt:8080/insulin?wsdl",
 //                                   "http://qcs19.dei.uc.pt/InsulinDoseCalculator/WebService?wsdl",
 //                                   "http://qcs22.dei.uc.pt/InsulinDoseCalculator?wsdl"};
+
     private final int numberThreads = 5;                        // number of webservices
     // ArrayList<Future<Integer>> lista = new ArrayList<Future<Integer>>();    //  valores (inteiros) devolvidos por cada web service
     ArrayList<Integer> lista = new ArrayList<Integer>();    //  valores (inteiros) devolvidos por cada web service
@@ -77,7 +57,7 @@ public class Voter {
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
             try {
-                BackgroundThread task = new BackgroundThread(urls.get(i), weight);
+                BackgroundThread task = new BackgroundThread(urls[i], weight);
 //                BackgroundThread task = new BackgroundThread(urls[i], weight);
                 Future<Integer> future = pool.submit(task);
                 System.out.println(future);
@@ -135,7 +115,7 @@ public class Voter {
         // criar as threads
         for(int i=0;i<numberThreads;i++) {
             try {
-                PersonalThread personalTask = new PersonalThread(urls.get(i), physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
+                PersonalThread personalTask = new PersonalThread(urls[i], physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
 //                PersonalThread personalTask = new PersonalThread(urls[i], physicalActivityLevel, physicalActivitySamples, bloodSugarDropSamples);
                 Future<Integer> future = pool.submit(personalTask);
                 threads.add(future);
@@ -148,7 +128,7 @@ public class Voter {
 
         //Timer for each thread
         for(int i=0;i<numberThreads;i++) {
-            String url = urls.get(i);
+            String url = urls[i];
             Future<Integer> future = threads.get(i);
             try {
                 System.out.println("Started... "+url);
@@ -181,7 +161,7 @@ public class Voter {
         ExecutorService pool = Executors.newFixedThreadPool(numberThreads);
 
         for(int i=0;i<numberThreads;i++){
-            String url = urls.get(i);
+            String url = urls[i];
 
             MealTimeThread task = new MealTimeThread(url,carbohydrateAmount, carbohydrateToInsulinRatio, preMealBloodSugar, targetBloodSugar, personalSensitivity);
             Future<Integer> future = pool.submit(task);
